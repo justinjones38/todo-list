@@ -10,7 +10,7 @@
 git clone git@github.com:justinjones38/todo-list.git
 ```
 
-2) Install the dependecies
+2) Install the dependencies
 
 ```bash
 npm install
@@ -18,7 +18,7 @@ npm install
 
 ---
 
-### How to run the developerment sever
+### How to run the development sever
 1) Run the development server
 ```bash 
 npm run dev
