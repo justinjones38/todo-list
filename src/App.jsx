@@ -9,20 +9,21 @@ export default function App() {
     const newTodo = {
       id: Date.now(),
       title: todoTitle,
-      isCompleted: false
+      isCompleted: false,
     };
 
     setTodoList((prevTodoList) => [newTodo, ...prevTodoList]);
   };
 
   const completeTodo = (id) => {
-    const updatedTodos = todoList.map(item => {
-      if(item.id === id) {
-        return {...item, isCompleted: true}
-      } return item
-    })
+    const updatedTodos = todoList.map((item) => {
+      if (item.id === id) {
+        return { ...item, isCompleted: true };
+      }
+      return item;
+    });
     setTodoList(updatedTodos);
-  }
+  };
 
   return (
     <div>

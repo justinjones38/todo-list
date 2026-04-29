@@ -26,7 +26,9 @@ export default function TodoForm({ onAddTodo }) {
         onChange={(e) => setWorkingTodoTitle(e.target.value)}
         required
       />
-      <button type="submit" disabled={!workingTodoTitle.trim()}>Add Todo</button>
+      <button type="submit" disabled={!workingTodoTitle.trim()}>
+        Add Todo
+      </button>
     </form>
   );
 }
