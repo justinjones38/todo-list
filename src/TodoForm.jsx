@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function TodoForm({ onAddTodo }) {
   const [workingTodoTitle, setWorkingTodoTitle] = useState("");
@@ -26,7 +26,7 @@ export default function TodoForm({ onAddTodo }) {
         onChange={(e) => setWorkingTodoTitle(e.target.value)}
         required
       />
-      <button type="submit">Add Todo</button>
+      <button type="submit" disabled={!workingTodoTitle.trim()}>Add Todo</button>
     </form>
   );
 }
