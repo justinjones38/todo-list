@@ -9,7 +9,7 @@ export default function TodoForm({ onAddTodo }) {
     const todoTitle = event.target.todoTitle.value.trim();
     if (todoTitle) {
       onAddTodo(todoTitle);
-      event.target.reset("");
+      event.target.reset();
       inputRef.current.focus();
     }
   };
