@@ -1,4 +1,4 @@
-import TodoList from "./shared/TodoList";
+import TodoList from "./features/TodoList/TodoList";
 import TodoForm from "./features/TodoForm";
 import { useState } from "react";
 import "./App.css";
