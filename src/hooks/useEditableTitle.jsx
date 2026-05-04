@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 export default function useEditableTitle(initialTitle) {
   const [isEditing, setIsEditing] = useState(false);
@@ -7,21 +7,21 @@ export default function useEditableTitle(initialTitle) {
   const startEditing = () => {
     setWorkingTitle(initialTitle);
     setIsEditing(true);
-  }
+  };
 
   const cancelEdit = () => {
-    setWorkingTitle(initialTitle)
+    setWorkingTitle(initialTitle);
     setIsEditing(false);
-  }
+  };
 
   const updateTitle = (newTitle) => {
-    setWorkingTitle(newTitle)
-  }
+    setWorkingTitle(newTitle);
+  };
 
   const finishEdit = () => {
     setIsEditing(false);
     return workingTitle;
-  }
+  };
 
   return {
     isEditing,
@@ -29,6 +29,6 @@ export default function useEditableTitle(initialTitle) {
     startEditing,
     cancelEdit,
     updateTitle,
-    finishEdit
+    finishEdit,
   };
 }

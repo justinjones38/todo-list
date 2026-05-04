@@ -3,9 +3,8 @@ export default function TextInputWithLabel({
   labelText,
   onChange,
   ref,
-  value
+  value,
 }) {
-  
   return (
     <>
       <label htmlFor={elementId}>{labelText}</label>
@@ -17,5 +16,5 @@ export default function TextInputWithLabel({
         onChange={onChange}
       />
     </>
-  )
+  );
 }
