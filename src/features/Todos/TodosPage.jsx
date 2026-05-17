@@ -10,6 +10,9 @@ export default function TodosPage({ token }) {
   const [originalTodo, setOriginalTodo] = useState({})
 
   useEffect(() => {
+    if(!token) {
+      return;
+    }
     const fetchTodos = async () => {
       try {
         setIsTodoListLoading(true);
@@ -27,7 +30,7 @@ export default function TodosPage({ token }) {
         const resJson = await res.json();
         setTodoList(resJson.tasks);
       } catch (error) {
-        setError(true);
+        setError("Cannot fetch todo data");
       } finally {
         setIsTodoListLoading(false);
       }
@@ -96,7 +99,6 @@ export default function TodosPage({ token }) {
 
   const updateTodo = async (editedTodo) => {
     const originalTodos = [...todoList]
-    console.log("run");
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
@@ -110,7 +112,6 @@ export default function TodosPage({ token }) {
       body: JSON.stringify({title: editedTodo.title, isCompleted: editedTodo.isCompleted}),
       headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
     })
-    console.log("fetch ran")
     if(!res.ok) {
       throw new Error("Error cannot patch data")
     }
@@ -118,7 +119,7 @@ export default function TodosPage({ token }) {
     const resJson = await res.json();
     } catch (error) {
       setTodoList(originalTodos)
-      setError("Cannut update todo")
+      setError("Cannot update todo")
     }
   };
   return (

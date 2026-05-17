@@ -1,18 +1,17 @@
 import { useState } from "react";
 
 export default function Logon({
-  onSetEmail,
-  onSetToken
+  onSetEmail=()=>{},
+  onSetToken=()=>{}
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    setIsLoggingOn(true);
     try {
       const res = await fetch(`/api/users/logon`, {
         method: "POST",
@@ -34,20 +33,20 @@ export default function Logon({
     } catch(error) {
       setAuthError(`Error ${error.name} | ${error.message}`);
     } finally {
-      setLoading(false);
+      setIsLoggingOn(false);
     }
   };
-  console.log(email, password);
+  console.log(authError);
 
   return (
     <div>
-      {authError ? <p>Cannot locate account</p> : null}
+      {authError ? <p>{authError}</p> : null}
     <form onSubmit={handleSubmit}>
       <label htmlFor="email">Email</label>
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" />
       <label htmlFor="password">Password</label>
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button disabled={loading}>{loading ? "Logging in" : "Log on"}</button>
+      <input type="password" value={password} onChange={e => setPassword(e.target.value)} id="password" />
+      <button disabled={isLoggingOn}>{isLoggingOn ? "Logging in" : "Log on"}</button>
     </form>
     </div>
 
