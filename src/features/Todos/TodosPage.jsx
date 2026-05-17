@@ -18,7 +18,6 @@ export default function TodosPage({ token }) {
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         });
-        console.log(res);
         if (!res.ok) {
           if (res.status === 401) {
             throw new Error("Unathorized Error");
@@ -64,14 +63,13 @@ export default function TodosPage({ token }) {
       setTodoList(prevTodoList => [resJson, ...prevTodoList.slice(1)])
       
     } catch (error) {
+      setError("Cannot add todo")
       setTodoList(prevTodoList => prevTodoList.slice(1))
-      return;
     }
   };
-  console.log(todoList);
 
   const completeTodo = async(id) => {
-    const originalTodo = [...todoList]
+    const originalTodos = [...todoList]
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {
         return { ...item, isCompleted: true };
@@ -79,43 +77,61 @@ export default function TodosPage({ token }) {
       return item;
     });
     setTodoList(updatedTodos);
-    console.log(originalTodo);    
     try {
     const res = await fetch(`/api/tasks/${id}`, {
       method: "PATCH",
       body: JSON.stringify({isCompleted: true,}),
       headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
     })
-    console.log(res);
     if(!res.ok) {
       throw new Error("Error cannot patch data")
     }
 
     const resJson = await res.json();
-    console.log(resJson);
     } catch (error) {
-      setTodoList(originalTodo)
-      return;
+      setTodoList(originalTodos)
+      setError("Cannot complete todo")
     }
   };
 
-  const updateTodo = (editedTodo) => {
+  const updateTodo = async (editedTodo) => {
+    const originalTodos = [...todoList]
+    console.log("run");
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
       }
       return todo;
     });
-    setTodoList(updatedTodos);
+    setTodoList(updatedTodos)
+    try {
+    const res = await fetch(`/api/tasks/${editedTodo.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({title: editedTodo.title, isCompleted: editedTodo.isCompleted}),
+      headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
+    })
+    console.log("fetch ran")
+    if(!res.ok) {
+      throw new Error("Error cannot patch data")
+    }
+
+    const resJson = await res.json();
+    } catch (error) {
+      setTodoList(originalTodos)
+      setError("Cannut update todo")
+    }
   };
   return (
     <div>
+      {error ? <h2>{error}</h2> : null}
+      {isTodoListLoading ? <h2>Loading...</h2> : null}
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
       />
+      {error ? <button onClick={() => setError("")}>Clear Error</button> : null}
     </div>
   );
 }
