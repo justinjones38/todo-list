@@ -1,33 +1,29 @@
-import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-// https://vite.dev/config/
-export default ({ mode }) => {
-  const env = loadEnv(mode, '.', '');
-  return defineConfig({
-    plugins: [react()],
-    server: {
-      port: 3001,
-      proxy: {
-        '/api': {
-          target: env.VITE_TARGET,
-          secure: false,
-          changeOrigin: true,
-          configure: (proxy) => {
-            proxy.on('proxyRes', (proxyRes) => {
-              const cookies = proxyRes.headers['set-cookie'];
-              if (cookies) {
-                proxyRes.headers['set-cookie'] = cookies.map((cookie) =>
-                  cookie
-                    .replace(/; *Secure/gi, '')
-                    .replace(/; *SameSite=None/gi, '')
-                    .replace(/; *Domain=[^;]+/gi, '')
-                );
-              }
-            });
-          },
-        },
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
       },
     },
-  });
-};
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
+])
