@@ -58,7 +58,6 @@ export default function TodosPage({ token }) {
       });
 
       if(!res.ok){
-        setTodoList(prevTodoList => prevTodoList.slice(1))
         throw new Error(res)
       }
 
@@ -72,7 +71,7 @@ export default function TodosPage({ token }) {
   };
 
   const completeTodo = async(id) => {
-    const originalTodos = [...todoList]
+    const originalTodos = [...todoList];
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {
         return { ...item, isCompleted: true };
@@ -83,8 +82,9 @@ export default function TodosPage({ token }) {
     try {
     const res = await fetch(`/api/tasks/${id}`, {
       method: "PATCH",
-      body: JSON.stringify({isCompleted: true,}),
-      headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
+      body: JSON.stringify({isCompleted: true}),
+      headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token, },
+      credentials: "include"
     })
     if(!res.ok) {
       throw new Error("Error cannot patch data")
@@ -111,6 +111,7 @@ export default function TodosPage({ token }) {
       method: "PATCH",
       body: JSON.stringify({title: editedTodo.title, isCompleted: editedTodo.isCompleted}),
       headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
+      credentials: "include"
     })
     if(!res.ok) {
       throw new Error("Error cannot patch data")
