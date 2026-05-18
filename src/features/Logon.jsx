@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export default function Logon({
-  onSetEmail,
-  onSetToken
+  onSetEmail = () => {},
+  onSetToken = () => {},
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +29,7 @@ export default function Logon({
       } else {
         setAuthError(`Authentication failed: ${data?.message}`);
       }
-    } catch(error) {
+    } catch (error) {
       setAuthError(`Error ${error.name} | ${error.message}`);
     } finally {
       setIsLoggingOn(false);
@@ -39,14 +39,25 @@ export default function Logon({
   return (
     <div>
       {authError ? <p>{authError}</p> : null}
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Email</label>
-      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} id="email" />
-      <label htmlFor="password">Password</label>
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} id="password" />
-      <button disabled={isLoggingOn}>{isLoggingOn ? "Logging in" : "Log on"}</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          id="email"
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          id="password"
+        />
+        <button disabled={isLoggingOn}>
+          {isLoggingOn ? "Logging in" : "Log on"}
+        </button>
+      </form>
     </div>
-
-  )
+  );
 }

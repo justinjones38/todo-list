@@ -1,7 +1,3 @@
-
-
 export default function Header() {
-  return (
-    <h1>Todo List</h1>
-  )
+  return <h1>Todo List</h1>;
 }
