@@ -46,6 +46,7 @@ export default function Logon({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           id="email"
+          required
         />
         <label htmlFor="password">Password</label>
         <input
@@ -53,6 +54,7 @@ export default function Logon({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           id="password"
+          required
         />
         <button disabled={isLoggingOn}>
           {isLoggingOn ? "Logging in" : "Log on"}
