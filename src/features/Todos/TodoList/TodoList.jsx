@@ -14,7 +14,7 @@ export default function TodoList({
       todos: todoList.filter((item) => !item.isCompleted),
     };
   }, [dataVersion, todoList]);
-  return filteredTodoList.length === 0 ? (
+  return filteredTodoList.todos.length === 0 ? (
     <p>Add todo above to get started</p>
   ) : (
     <ul>
