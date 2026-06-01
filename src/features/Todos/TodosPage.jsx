@@ -49,7 +49,7 @@ export default function TodosPage({ token }) {
           paramsObject.find = debouncedFilterTerm;
         }
         const params = new URLSearchParams(paramsObject);
-        const res = await fetch(`/api/tass?${params}`, {
+        const res = await fetch(`/api/tasks?${params}`, {
           method: "GET",
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
