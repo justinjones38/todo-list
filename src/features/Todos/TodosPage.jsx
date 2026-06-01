@@ -38,11 +38,6 @@ export default function TodosPage({ token }) {
     sortDirection,
   };
 
-  if (debouncedFilterTerm) {
-    paramsObject.find = debouncedFilterTerm;
-  }
-  const params = new URLSearchParams(paramsObject);
-
   useEffect(() => {
     if (!token) {
       return;
@@ -50,16 +45,21 @@ export default function TodosPage({ token }) {
     const fetchTodos = async () => {
       try {
         setIsTodoListLoading(true);
-        const res = await fetch(`/api/tasks?${params}`, {
+        if (debouncedFilterTerm) {
+          paramsObject.find = debouncedFilterTerm;
+        }
+        const params = new URLSearchParams(paramsObject);
+        const res = await fetch(`/api/tass?${params}`, {
           method: "GET",
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         });
+        console.log(res);
         if (!res.ok) {
           if (res.status === 401) {
-            throw new Error("Cannot Fetch Data");
+            throw new Error("Cannot find data");
           }
-          throw new Error("Todos not found");
+          throw new Error("Data not fetched");
         }
         const resJson = await res.json();
         setTodoList(resJson.tasks);
@@ -70,9 +70,9 @@ export default function TodosPage({ token }) {
           sortBy !== "createdAt" ||
           sortDirection !== "desc"
         ) {
-          setFilterError(`Error filtering/sorting todos: ${error}`);
+          setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
-          setError(`Error fetching todos: ${error}`);
+          setError(`Error fetching todos: ${error.message}`);
         }
       } finally {
         setIsTodoListLoading(false);
