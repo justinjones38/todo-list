@@ -54,7 +54,6 @@ export default function TodosPage({ token }) {
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         });
-        console.log(res);
         if (!res.ok) {
           if (res.status === 401) {
             throw new Error("Cannot find data");

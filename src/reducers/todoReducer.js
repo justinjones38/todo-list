@@ -33,30 +33,84 @@ export const initialTodoState = {
 
 export function todoReducer(state, action) {
   switch(action.type) {
-    // case TODO_ACTIONS.FETCH_START:
-    //   return {
-    //     ...state,
-    //     isTodoListLoading: true,
-    //     error: "",
-    //     filterError: ""
-    //   }
+    case TODO_ACTIONS.FETCH_START:
+      return {
+        ...state,
+        isTodoListLoading: true,
+        error: "",
+        filterError: ""
+      }
     
-    // case TODO_ACTIONS.FETCH_SUCCESS:
-    //   return {
-    //     ...state,
-    //     todoList: [...action.payload.todoItems],
-    //     isTodoListLoading: false,
-    //     error: "",
-    //     filterError: ""
-    //   }
+    case TODO_ACTIONS.FETCH_SUCCESS:
+      return {
+        ...state,
+        todoList: [...action.payload.todoItems],
+        isTodoListLoading: false,
+        error: "",
+        filterError: ""
+      }
 
-    // case TODO_ACTIONS.FETCH_ERROR:
-    //   return {
-    //     ...state,
-    //   }
+      // Need to complete this one
+    case TODO_ACTIONS.FETCH_ERROR:
+      return {
+        ...state,
+        isTodoListLoading: false,
+      }
       
-    // case TODO_ACTIONS.ADD_TODO_START:
+    case TODO_ACTIONS.ADD_TODO_START:
+      return {
+        ...state,
+        todoList: [action.payload.newTodo, ...state.todoList]
+      }
 
+    case TODO_ACTIONS.ADD_TODO_SUCCESS:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1
+      }
+
+    case TODO_ACTIONS.ADD_TODO_ERROR:
+      return {
+        ...state,
+        error: action.payload.errorText,
+        todoList: state.todoList.slice(1)
+      }
+
+    case TODO_ACTIONS.COMPLETE_TODO:
+      return {
+        ...state,
+        todoList: [...action.payload.newTodoList]
+      }
+
+    case TODO_ACTIONS.UPDATE_TODO:
+      return {
+        ...state,
+        todoList: [...action.payload.updatedTodoList]
+      }
+    
+    case TODO_ACTIONS.SET_SORT:
+      return {
+        ...state,
+        sortBy: action.payload.newSortBy
+      }
+
+    case TODO_ACTIONS.SET_FILTER:
+      return {
+        ...state,
+        filterTerm: action.payload.newFilterTerm
+      }
+    
+    case TODO_ACTIONS.CLEAR_ERROR:
+      return {
+        ...state,
+        error: ""
+      }
+    
+    case TODO_ACTIONS.RESET_FILTERS:
+      return {
+        ...state,
+        filterError: ""
+      }
     
 
     default:
