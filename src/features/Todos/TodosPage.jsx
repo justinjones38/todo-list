@@ -1,5 +1,4 @@
 import TodoList from "./TodoList/TodoList";
-import Logoff from "../Logoff";
 import TodoForm from "./TodoForm";
 import { useState, useEffect, useCallback, useReducer } from "react";
 import useDebounce from "../../utils/useDebounce";
@@ -173,7 +172,6 @@ export default function TodosPage() {
       />
       <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
       <TodoForm onAddTodo={addTodo} />
-      <Logoff />
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
