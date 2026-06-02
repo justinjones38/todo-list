@@ -5,7 +5,7 @@ const AuthContext = createContext();
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAUth must be used within an AuthProvider");
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
@@ -24,7 +24,6 @@ export function AuthProvider({ children }) {
       };
       const res = await fetch("/api/users/logon", options);
       const data = await res.json();
-      console.log("Ran");
 
       if (res.status === 200 && data.name && data.csrfToken) {
         setEmail(data.name);
@@ -52,10 +51,9 @@ export function AuthProvider({ children }) {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
-        body: JSON.stringify({ email: userEmail, password }),
         credentials: "include",
       };
-      const res = await fetch("/user/logoff", options);
+      const res = await fetch("/api/users/logoff", options);
       const data = await res.json();
       if (res.status === 200 && data.name && data.csrfToken) {
         return { success: true };

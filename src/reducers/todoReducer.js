@@ -56,7 +56,7 @@ export function todoReducer(state, action) {
         filterError: "",
       };
 
-    case TODO_ACTIONS.ADD_TODO_FILTER_ERROR:
+    case TODO_ACTIONS.FETCH_FILTER_ERROR:
       return {
         ...state,
         isTodoListLoading: false,
