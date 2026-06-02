@@ -14,9 +14,10 @@ export default function Logon({}) {
     try {
       const result = await login(email, password);
       if (!result.success) {
-        setAuthError("Error");
+        throw new Error();
       }
     } catch (error) {
+      setAuthError("Cannot log in");
       return;
     } finally {
       setIsLoggingOn(false);
