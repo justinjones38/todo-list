@@ -4,6 +4,7 @@ export const TODO_ACTIONS = {
   // Fetch operations
   FETCH_START: "FETCH_START",
   FETCH_SUCCESS: "FETCH_SUCCESS",
+  FETCH_FILTER_ERROR: "FETCH_FILTER_ERROR",
   FETCH_ERROR: "FETCH_ERROR",
 
   // Add todo operations
@@ -24,6 +25,7 @@ export const TODO_ACTIONS = {
   SET_SORT: "SET_SORT",
   SET_FILTER: "SET_FILTER",
   CLEAR_ERROR: "CLEAR_ERROR",
+  CLEAR_FILTER_ERROR: "CLEAR_FILTER_ERROR",
   RESET_FILTERS: "RESET_FILTERS"
 }
 
@@ -57,10 +59,17 @@ export function todoReducer(state, action) {
         filterError: ""
       }
 
+    case TODO_ACTIONS.ADD_TODO_FILTER_ERROR:
+      return {
+        ...state,
+        isTodoListLoading: false,
+        filterError: action.payload.filterError
+      }
       // Need to complete this one
     case TODO_ACTIONS.FETCH_ERROR:
       return {
         ...state,
+        error: action.payload.error,
         isTodoListLoading: false,
       }
       
@@ -123,6 +132,8 @@ export function todoReducer(state, action) {
       }
     
     case TODO_ACTIONS.SET_SORT:
+      console.log(state.sortBy);
+      console.log(state.sortDirection);
       return {
         ...state,
         sortBy: action.payload.newSortBy,
@@ -139,6 +150,12 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: ""
+      }
+
+    case TODO_ACTIONS.CLEAR_FILTER_ERROR:
+      return {
+        ...state,
+        filterError: "",
       }
     
     case TODO_ACTIONS.RESET_FILTERS:

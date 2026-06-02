@@ -41,11 +41,12 @@ export default function TodosPage({ token }) {
           paramsObject.find = debouncedFilterTerm;
         }
         const params = new URLSearchParams(paramsObject);
-        const res = await fetch(`/api/tasks?${params}`, {
+        const res = await fetch(`/api/tasks?limit=1000&${params}`, {
           method: "GET",
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         });
+        console.log(res);
         if (!res.ok) {
           if (res.status === 401) {
             throw new Error("Cannot find data");
@@ -53,6 +54,7 @@ export default function TodosPage({ token }) {
           throw new Error("Data not fetched");
         }
         const resJson = await res.json();
+        console.log(resJson);
         dispatch({type: TODO_ACTIONS.FETCH_SUCCESS, payload: {todoList: resJson.tasks}});
       } catch (error) {
         // Need to fix this
@@ -61,9 +63,9 @@ export default function TodosPage({ token }) {
           sortBy !== "createdAt" ||
           sortDirection !== "desc"
         ) {
-          setFilterError(`Error filtering/sorting todos: ${error.message}`);
+          dispatch({type: TODO_ACTIONS.FETCH_FILTER_ERROR, payload: {filterError: `Error filtering/sorting todos: ${error.message}`}});
         } else {
-          setError(`Error fetching todos: ${error.message}`);
+          dispatch({type: TODO_ACTIONS.FETCH_ERROR, payload: {error: `Error fetching todos: ${error.message}`}})
         }
       }
     };
@@ -184,7 +186,7 @@ export default function TodosPage({ token }) {
       {filterError ? (
         <div>
           <p>{filterError}</p>
-          <button onClick={(e) => setFilterError("")}>
+          <button onClick={(e) => dispatch({type: TODO_ACTIONS.CLEAR_FILTER_ERROR})}>
             Clear Filter Error
           </button>
           <button onClick={() => dispatch({type: TODO_ACTIONS.RESET_FILTERS})}>Reset Filters</button>
