@@ -1,30 +1,28 @@
 import TodoList from "./TodoList/TodoList";
 import TodoForm from "./TodoForm";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useCallback, useReducer } from "react";
 import useDebounce from "../../utils/useDebounce";
 import SortBy from "../../shared/SortBy";
 import FilterInput from "../../shared/FilterInput";
-import { useCallback } from "react";
-
+import { initialTodoState, todoReducer, TODO_ACTIONS } from "../../reducers/todoReducer";
 
 
 export default function TodosPage({ token }) {
-  const [todoList, setTodoList] = useState([]);
-  const [error, setError] = useState("");
-  const [isTodoListLoading, setIsTodoListLoading] = useState(false);
-  const [sortBy, setSortBy] = useState("createdAt");
-  const [sortDirection, setSortDirection] = useState("desc");
-  const [filterTerm, setFilterTerm] = useState("");
+  const [state, dispatch] = useReducer(todoReducer, initialTodoState)
+
+  const {
+    todoList,
+    error,
+    filterError,
+    isTodoListLoading,
+    sortBy,
+    sortDirection,
+    filterTerm,
+    dataVersion
+  } = state;
+
+
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
-  const [dataVersion, setDataVersion] = useState(0);
-  const [filterError, setFilterError] = useState("");
-
-
-  const handleFilterChange = (newTerm) => {
-    setFilterTerm(newTerm);
-  };
-
   const invalidateCache = useCallback(() => {
     setDataVersion((prev) => prev + 1);
   }, []);
@@ -47,7 +45,6 @@ export default function TodosPage({ token }) {
     }
     const fetchTodos = async () => {
       try {
-        setIsTodoListLoading(true);
         if (debouncedFilterTerm) {
           paramsObject.find = debouncedFilterTerm;
         }
@@ -82,8 +79,6 @@ export default function TodosPage({ token }) {
     };
     fetchTodos();
   }, [token, sortBy, sortDirection, debouncedFilterTerm]);
-
-
   const addTodo = async (todoTitle) => {
     const originalTodos = todoList;
     const newTodo = {
@@ -108,6 +103,9 @@ export default function TodosPage({ token }) {
       if (!res.ok) {
         throw new Error(res);
       }
+
+      const resJson = await res.json();
+
       invalidateCache();
       
     } catch (error) {
@@ -167,6 +165,7 @@ export default function TodosPage({ token }) {
         throw new Error("Error cannot patch data");
       }
 
+      const resJson = await res.json();
       invalidateCache();
     } catch (error) {
       setTodoList(originalTodos);

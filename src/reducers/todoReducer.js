@@ -143,7 +143,10 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.RESET_FILTERS:
       return {
         ...state,
-        filterError: ""
+        filterError: "",
+        filterTerm: "",
+        sortBy: "createdAt",
+        sortDirection: "desc"
       }
     
 
