@@ -14,15 +14,8 @@ export function AuthProvider({ children }) {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
 
-  const value = {
-    email,
-    token,
-    isAuthenticated: !!token,
-    login,
-    logout,
-  };
-
   const login = async (userEmail, password) => {
+    
     try {
       const options = {
         method: "POST",
@@ -32,6 +25,7 @@ export function AuthProvider({ children }) {
       };
       const res = await fetch("/api/users/logon", options);
       const data = await res.json();
+      console.log("Ran");
 
       if (res.status === 200 && data.name && data.csrfToken) {
         setEmail(data.name);
@@ -47,10 +41,9 @@ export function AuthProvider({ children }) {
       return {
         success: false,
         error: "Network error during login",
-      };
-    }
+      }; 
+    } 
   };
-
   const logout = async () => {
     if (!token) {
       setEmail("");
@@ -83,6 +76,16 @@ export function AuthProvider({ children }) {
       setToken("");
     }
   };
+
+  const value = {
+    email,
+    token,
+    isAuthenticated: !!token,
+    login,
+    logout,
+  };
+
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -1,14 +1,17 @@
 import TodoList from "./TodoList/TodoList";
+import Logoff from "../Logoff";
 import TodoForm from "./TodoForm";
 import { useState, useEffect, useCallback, useReducer } from "react";
 import useDebounce from "../../utils/useDebounce";
 import SortBy from "../../shared/SortBy";
 import FilterInput from "../../shared/FilterInput";
 import { initialTodoState, todoReducer, TODO_ACTIONS } from "../../reducers/todoReducer";
+import { useAuth } from "../../contexts/AuthContext";
 
 
-export default function TodosPage({ token }) {
+export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState)
+  const {token} = useAuth();
 
   const {
     todoList,
@@ -170,6 +173,7 @@ export default function TodosPage({ token }) {
       />
       <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
       <TodoForm onAddTodo={addTodo} />
+      <Logoff />
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}

@@ -1,3 +1,10 @@
+import { useAuth } from "../contexts/AuthContext";
+
 export default function Header() {
-  return <h1>Todo List</h1>;
+  const {token} = useAuth();
+  return (
+    <div>
+      <h1>Todo List</h1>
+    </div>
+  )
 }
