@@ -132,8 +132,6 @@ export function todoReducer(state, action) {
       }
     
     case TODO_ACTIONS.SET_SORT:
-      console.log(state.sortBy);
-      console.log(state.sortDirection);
       return {
         ...state,
         sortBy: action.payload.newSortBy,

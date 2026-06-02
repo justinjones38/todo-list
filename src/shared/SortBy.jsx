@@ -5,7 +5,6 @@ export default function SortBy({
   sortDirection,
   dispatch
 }) {
-  console.log(sortBy, sortDirection);
   return (
     <div>
       <label htmlFor="sortBy">Sort By</label>

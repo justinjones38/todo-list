@@ -46,7 +46,6 @@ export default function TodosPage({ token }) {
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         });
-        console.log(res);
         if (!res.ok) {
           if (res.status === 401) {
             throw new Error("Cannot find data");
@@ -54,7 +53,6 @@ export default function TodosPage({ token }) {
           throw new Error("Data not fetched");
         }
         const resJson = await res.json();
-        console.log(resJson);
         dispatch({type: TODO_ACTIONS.FETCH_SUCCESS, payload: {todoList: resJson.tasks}});
       } catch (error) {
         // Need to fix this
@@ -110,13 +108,11 @@ export default function TodosPage({ token }) {
     const originalTodos = [...todoList];
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {
-        console.log(item);
         return { ...item, isCompleted: true };
       }
       return item;
     });
     dispatch({type: TODO_ACTIONS.COMPLETE_TODO_START, payload: {updatedTodos}})
-    console.log(id);
     try {
       const res = await fetch(`/api/tasks/${id}`, {
         method: "PATCH",
@@ -124,8 +120,6 @@ export default function TodosPage({ token }) {
         headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
         credentials: "include",
       });
-      console.log(todoList);
-      console.log(res);
       if (!res.ok) {
         throw new Error("Error cannot patch data");
       }
