@@ -6,25 +6,22 @@ export default function Logon({}) {
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
-  const {login} = useAuth();
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsLoggingOn(true)
+    setIsLoggingOn(true);
     try {
-    const result = await login(email, password);
-    if(!result.success) {
-      setAuthError("Error")
-    }
+      const result = await login(email, password);
+      if (!result.success) {
+        setAuthError("Error");
+      }
     } catch (error) {
       return;
     } finally {
       setIsLoggingOn(false);
     }
-
-  }
-
-
+  };
 
   return (
     <div>
@@ -46,7 +43,7 @@ export default function Logon({}) {
           id="password"
           required
         />
-        
+
         <button disabled={isLoggingOn}>
           {isLoggingOn ? "Logging in" : "Log on"}
         </button>

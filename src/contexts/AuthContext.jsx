@@ -15,7 +15,6 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState("");
 
   const login = async (userEmail, password) => {
-    
     try {
       const options = {
         method: "POST",
@@ -41,8 +40,8 @@ export function AuthProvider({ children }) {
       return {
         success: false,
         error: "Network error during login",
-      }; 
-    } 
+      };
+    }
   };
   const logout = async () => {
     if (!token) {
@@ -84,8 +83,6 @@ export function AuthProvider({ children }) {
     login,
     logout,
   };
-
-
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

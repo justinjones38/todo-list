@@ -8,7 +8,12 @@ export default function FilterInput({ filterTerm, dispatch }) {
         id="filterInput"
         type="text"
         value={filterTerm}
-        onChange={(e) => dispatch({type: TODO_ACTIONS.SET_FILTER, payload: {newFilterTerm: e.target.value} })}
+        onChange={(e) =>
+          dispatch({
+            type: TODO_ACTIONS.SET_FILTER,
+            payload: { newFilterTerm: e.target.value },
+          })
+        }
         placeholder="Search by title"
       />
     </div>
