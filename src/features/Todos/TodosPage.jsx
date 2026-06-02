@@ -23,16 +23,7 @@ export default function TodosPage({ token }) {
 
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
-  // const invalidateCache = useCallback(() => {
-  //   setDataVersion((prev) => prev + 1);
-  // }, []);
 
-  // const resetFilterError = () => {
-  //   setFilterTerm("");
-  //   setSortBy("createdAt");
-  //   setSortDirection("desc");
-  //   setFilterError("");
-  // };
 
   const paramsObject = {
     sortBy,
@@ -175,11 +166,10 @@ export default function TodosPage({ token }) {
       {isTodoListLoading ? <h2>Loading...</h2> : null}
       <SortBy
         sortBy={sortBy}
-        onSortByChange={setSortBy}
+        dispatch={dispatch}
         sortDirection={sortDirection}
-        onSortDirectionChange={setSortDirection}
       />
-      <FilterInput filterTerm={filterTerm} onFilterChange={setFilterTerm} />
+      <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
