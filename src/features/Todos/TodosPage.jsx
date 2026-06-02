@@ -18,6 +18,7 @@ export default function TodosPage({ token }) {
   const [dataVersion, setDataVersion] = useState(0);
   const [filterError, setFilterError] = useState("");
 
+
   const handleFilterChange = (newTerm) => {
     setFilterTerm(newTerm);
   };
@@ -79,7 +80,10 @@ export default function TodosPage({ token }) {
     };
     fetchTodos();
   }, [token, sortBy, sortDirection, debouncedFilterTerm]);
+
+
   const addTodo = async (todoTitle) => {
+    const originalTodos = todoList;
     const newTodo = {
       id: Date.now(),
       title: todoTitle,
@@ -102,12 +106,11 @@ export default function TodosPage({ token }) {
       if (!res.ok) {
         throw new Error(res);
       }
-
-      const resJson = await res.json();
       invalidateCache();
+      
     } catch (error) {
       setError("Cannot add todo");
-      setTodoList((prevTodoList) => prevTodoList.slice(1));
+      setTodoList(originalTodos);
     }
   };
 
@@ -115,6 +118,7 @@ export default function TodosPage({ token }) {
     const originalTodos = [...todoList];
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {
+        console.log(item);
         return { ...item, isCompleted: true };
       }
       return item;
@@ -131,7 +135,6 @@ export default function TodosPage({ token }) {
         throw new Error("Error cannot patch data");
       }
 
-      const resJson = await res.json();
       invalidateCache();
     } catch (error) {
       setTodoList(originalTodos);
@@ -162,7 +165,6 @@ export default function TodosPage({ token }) {
         throw new Error("Error cannot patch data");
       }
 
-      const resJson = await res.json();
       invalidateCache();
     } catch (error) {
       setTodoList(originalTodos);
