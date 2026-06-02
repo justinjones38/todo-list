@@ -73,6 +73,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
       return {
         ...state,
+        todoList: [action.payload.newTodo, ...action.payload.originalTodos],
         dataVersion: state.dataVersion + 1
       }
 
@@ -122,7 +123,6 @@ export function todoReducer(state, action) {
       }
     
     case TODO_ACTIONS.SET_SORT:
-      console.log(state);
       return {
         ...state,
         sortBy: action.payload.newSortBy,

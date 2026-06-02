@@ -92,13 +92,13 @@ export default function TodosPage({ token }) {
         headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
         credentials: "include",
       });
-
       if (!res.ok) {
         throw new Error(res);
       }
 
-      dispatch({type: TODO_ACTIONS.ADD_TODO_SUCCESS});
-      
+      const resJson = await res.json();
+
+      dispatch({type: TODO_ACTIONS.ADD_TODO_SUCCESS, payload: {newTodo: resJson, originalTodos}});
     } catch (error) {
       dispatch({type: TODO_ACTIONS.ADD_TODO_ERROR, payload: {originalTodos, error: "Cannot add todo"}});
     }
@@ -114,6 +114,7 @@ export default function TodosPage({ token }) {
       return item;
     });
     dispatch({type: TODO_ACTIONS.COMPLETE_TODO_START, payload: {updatedTodos}})
+    console.log(id);
     try {
       const res = await fetch(`/api/tasks/${id}`, {
         method: "PATCH",
@@ -121,6 +122,8 @@ export default function TodosPage({ token }) {
         headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
         credentials: "include",
       });
+      console.log(todoList);
+      console.log(res);
       if (!res.ok) {
         throw new Error("Error cannot patch data");
       }
