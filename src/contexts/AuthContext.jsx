@@ -4,14 +4,14 @@ const AuthContext = createContext();
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if(!context) {
+  if (!context) {
     throw new Error("useAUth must be used within an AuthProvider");
   }
   return context;
 }
 
-export function AuthProvider({children}) {
-  const [email, setEmail] = useState('');
+export function AuthProvider({ children }) {
+  const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
 
   const value = {
@@ -19,12 +19,70 @@ export function AuthProvider({children}) {
     token,
     isAuthenticated: !!token,
     login,
-    logout
-  }
+    logout,
+  };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  )
+  const login = async (userEmail, password) => {
+    try {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: userEmail, password }),
+        credentials: "include",
+      };
+      const res = await fetch("/api/users/logon", options);
+      const data = await res.json();
+
+      if (res.status === 200 && data.name && data.csrfToken) {
+        setEmail(data.name);
+        setToken(data.csrfToken);
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          error: `Authentication failed: ${data?.message}`,
+        };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: "Network error during login",
+      };
+    }
+  };
+
+  const logout = async () => {
+    if (!token) {
+      setEmail("");
+      setToken("");
+    }
+    try {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
+        body: JSON.stringify({ email: userEmail, password }),
+        credentials: "include",
+      };
+      const res = await fetch("/user/logoff", options);
+      const data = await res.json();
+      if (res.status === 200 && data.name && data.csrfToken) {
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          error: `Authentication failed: ${data?.message}`,
+        };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: "Network error during login",
+      };
+    } finally {
+      setEmail("");
+      setToken("");
+    }
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
