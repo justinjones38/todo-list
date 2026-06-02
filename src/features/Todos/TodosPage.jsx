@@ -23,16 +23,16 @@ export default function TodosPage({ token }) {
 
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
-  const invalidateCache = useCallback(() => {
-    setDataVersion((prev) => prev + 1);
-  }, []);
+  // const invalidateCache = useCallback(() => {
+  //   setDataVersion((prev) => prev + 1);
+  // }, []);
 
-  const resetFilterError = () => {
-    setFilterTerm("");
-    setSortBy("createdAt");
-    setSortDirection("desc");
-    setFilterError("");
-  };
+  // const resetFilterError = () => {
+  //   setFilterTerm("");
+  //   setSortBy("createdAt");
+  //   setSortDirection("desc");
+  //   setFilterError("");
+  // };
 
   const paramsObject = {
     sortBy,
@@ -45,6 +45,7 @@ export default function TodosPage({ token }) {
     }
     const fetchTodos = async () => {
       try {
+        dispatch({type: TODO_ACTIONS.FETCH_START});
         if (debouncedFilterTerm) {
           paramsObject.find = debouncedFilterTerm;
         }
@@ -61,9 +62,9 @@ export default function TodosPage({ token }) {
           throw new Error("Data not fetched");
         }
         const resJson = await res.json();
-        setTodoList(resJson.tasks);
-        setFilterError("");
+        dispatch({type: TODO_ACTIONS.FETCH_SUCCESS, payload: {todoList: resJson.tasks}});
       } catch (error) {
+        // Need to fix this
         if (
           debouncedFilterTerm ||
           sortBy !== "createdAt" ||
@@ -73,12 +74,13 @@ export default function TodosPage({ token }) {
         } else {
           setError(`Error fetching todos: ${error.message}`);
         }
-      } finally {
-        setIsTodoListLoading(false);
       }
     };
+
     fetchTodos();
   }, [token, sortBy, sortDirection, debouncedFilterTerm]);
+
+
   const addTodo = async (todoTitle) => {
     const originalTodos = todoList;
     const newTodo = {
@@ -87,7 +89,7 @@ export default function TodosPage({ token }) {
       isCompleted: false,
     };
 
-    setTodoList((prevTodoList) => [newTodo, ...prevTodoList]);
+    dispatch({type: TODO_ACTIONS.ADD_TODO_START, payload: {newTodo}})
 
     try {
       const res = await fetch(`/api/tasks`, {
@@ -104,13 +106,10 @@ export default function TodosPage({ token }) {
         throw new Error(res);
       }
 
-      const resJson = await res.json();
-
-      invalidateCache();
+      dispatch({type: TODO_ACTIONS.ADD_TODO_SUCCESS});
       
     } catch (error) {
-      setError("Cannot add todo");
-      setTodoList(originalTodos);
+      dispatch({type: TODO_ACTIONS.ADD_TODO_ERROR, payload: {originalTodos, error: "Cannot add todo"}});
     }
   };
 
@@ -123,7 +122,7 @@ export default function TodosPage({ token }) {
       }
       return item;
     });
-    setTodoList(updatedTodos);
+    dispatch({type: TODO_ACTIONS.COMPLETE_TODO_START, payload: {updatedTodos}})
     try {
       const res = await fetch(`/api/tasks/${id}`, {
         method: "PATCH",
@@ -135,10 +134,9 @@ export default function TodosPage({ token }) {
         throw new Error("Error cannot patch data");
       }
 
-      invalidateCache();
+      dispatch({type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS})
     } catch (error) {
-      setTodoList(originalTodos);
-      setError("Cannot complete todo");
+      dispatch({type: TODO_ACTIONS.COMPLETE_TODO_ERROR, payload: {originalTodos, error: "Cannot complete todo"}})
     }
   };
 
@@ -150,7 +148,7 @@ export default function TodosPage({ token }) {
       }
       return todo;
     });
-    setTodoList(updatedTodos);
+    dispatch({type: TODO_ACTIONS.UPDATE_TODO_START, payload: {updatedTodos}})
     try {
       const res = await fetch(`/api/tasks/${editedTodo.id}`, {
         method: "PATCH",
@@ -166,10 +164,9 @@ export default function TodosPage({ token }) {
       }
 
       const resJson = await res.json();
-      invalidateCache();
+      dispatch({type: TODO_ACTIONS.UPDATE_TODO_SUCCESS, payload: {updatedTodos}})
     } catch (error) {
-      setTodoList(originalTodos);
-      setError("Cannot update todo");
+      dispatch({type: TODO_ACTIONS.UPDATE_TODO_ERROR, payload: {originalTodos, error: "Cannot update todo"}})
     }
   };
   return (
@@ -190,14 +187,14 @@ export default function TodosPage({ token }) {
         onUpdateTodo={updateTodo}
         dataVersion={dataVersion}
       />
-      {error ? <button onClick={() => setError("")}>Clear Error</button> : null}
+      {error ? <button onClick={() => dispatch({type: TODO_ACTIONS.CLEAR_ERROR})}>Clear Error</button> : null}
       {filterError ? (
         <div>
           <p>{filterError}</p>
           <button onClick={(e) => setFilterError("")}>
             Clear Filter Error
           </button>
-          <button onClick={resetFilterError}>Reset Filters</button>
+          <button onClick={() => dispatch({type: TODO_ACTIONS.RESET_FILTERS})}>Reset Filters</button>
         </div>
       ) : null}
     </div>
