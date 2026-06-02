@@ -51,7 +51,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.FETCH_SUCCESS:
       return {
         ...state,
-        todoList: [...action.payload.todoItems],
+        todoList: [...action.payload.todoList],
         isTodoListLoading: false,
         error: "",
         filterError: ""
@@ -79,26 +79,53 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.ADD_TODO_ERROR:
       return {
         ...state,
-        error: action.payload.errorText,
-        todoList: state.todoList.slice(1)
+        error: action.payload.error,
+        todoList: [...action.payload.originalTodos]
       }
 
-    case TODO_ACTIONS.COMPLETE_TODO:
+    case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
         ...state,
-        todoList: [...action.payload.newTodoList]
+        todoList: [...action.payload.updatedTodos]
       }
 
-    case TODO_ACTIONS.UPDATE_TODO:
+    case TODO_ACTIONS.COMPLETE_TODO_SUCCESS: 
       return {
         ...state,
-        todoList: [...action.payload.updatedTodoList]
+        dataVersion: state.dataVersion + 1
+      }
+    
+    case TODO_ACTIONS.COMPLETE_TODO_ERROR:
+      return {
+        ...state,
+        todoList: [...action.payload.originalTodos],
+        error: action.payload.error
+      }
+
+    case TODO_ACTIONS.UPDATE_TODO_START:
+      return {
+        ...state,
+        todoList: [...action.payload.updatedTodos]
+      }
+
+    case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1
+      }
+
+
+    case TODO_ACTIONS.UPDATE_TODO_ERROR:
+      return {
+        ...state,
+        todoList: [...action.payload.originalTodos]
       }
     
     case TODO_ACTIONS.SET_SORT:
       return {
         ...state,
-        sortBy: action.payload.newSortBy
+        sortBy: action.payload.newSortBy,
+        sortDirection: action.payload.newSortDirection
       }
 
     case TODO_ACTIONS.SET_FILTER:
