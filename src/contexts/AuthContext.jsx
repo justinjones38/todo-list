@@ -46,6 +46,7 @@ export function AuthProvider({ children }) {
     if (!token) {
       setEmail("");
       setToken("");
+      return;
     }
     try {
       const options = {

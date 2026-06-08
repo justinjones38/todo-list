@@ -11,5 +11,5 @@ export default function Logoff() {
       return error.message;
     }
   };
-  return <button onClick={logout}>Log off</button>;
+  return <button onClick={handleSubmit}>Log off</button>;
 }
