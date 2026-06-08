@@ -1,6 +1,17 @@
-ul {
+nav ul {
   list-style: none;
   display: flex;
   gap: 1rem;
   padding: 0;
+  color: black;
+}
+
+nav ul a {
+  color: black;
+  text-decoration: none;
+  transition: 0.4s color;
+}
+
+nav ul a:hover, nav ul a:focus {
+  color: purple;
 }

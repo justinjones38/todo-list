@@ -2,10 +2,16 @@ import {NavLink} from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 
-const navLinkStyle = ({isActive}) => {
-  return {
-    textUnderline: "4px solid black",
-    fontWeight: "700px"
+const navLinkStyle = (isActive) => {
+  if (isActive) {return {
+    borderBottom: "2px solid purple",
+    fontWeight: "700px",
+    color: "purple",
+  }}
+  else {
+    return {
+      color: "black",
+    }
   }
 }
 
