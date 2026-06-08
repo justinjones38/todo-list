@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {useNavigate, useLocation} from "react-router"
 import { useAuth } from "../contexts/AuthContext";
 
-export default function Logon({}) {
+export default function LoginPage({}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+  const path = useLocation();
+  console.log(path);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,6 +19,11 @@ export default function Logon({}) {
       const result = await login(email, password);
       if (!result.success) {
         throw new Error();
+      }
+      if(path.state?.pathname) {
+        navigate(path.state?.pathname)
+      } else {
+        navigate("/todos")
       }
     } catch (error) {
       setAuthError("Cannot log in");

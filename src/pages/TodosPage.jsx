@@ -1,19 +1,21 @@
-import TodoList from "./TodoList/TodoList";
-import TodoForm from "./TodoForm";
+import TodoList from "../features/Todos/TodoList/TodoList";
+import TodoForm from "../features/Todos/TodoForm";
+
 import { useState, useEffect, useCallback, useReducer } from "react";
-import useDebounce from "../../utils/useDebounce";
-import SortBy from "../../shared/SortBy";
-import FilterInput from "../../shared/FilterInput";
+import useDebounce from "../utils/useDebounce";
+import SortBy from "../shared/SortBy";
+import FilterInput from "../shared/FilterInput";
 import {
   initialTodoState,
   todoReducer,
   TODO_ACTIONS,
-} from "../../reducers/todoReducer";
-import { useAuth } from "../../contexts/AuthContext";
+} from "../reducers/todoReducer";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const { token } = useAuth();
+  console.log("ran");
 
   const {
     todoList,
