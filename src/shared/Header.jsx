@@ -1,3 +1,11 @@
+import { useAuth } from "../contexts/AuthContext";
+import Logoff from "../features/Logoff";
 export default function Header() {
-  return <h1>Todo List</h1>;
+  const { token, isAuthenticated } = useAuth();
+  return (
+    <div>
+      <h1>Todo List</h1>
+      {isAuthenticated ? <Logoff /> : null}
+    </div>
+  );
 }
