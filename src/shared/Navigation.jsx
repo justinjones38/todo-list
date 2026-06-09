@@ -5,7 +5,7 @@ const navLinkStyle = (isActive) => {
   if (isActive) {
     return {
       borderBottom: "2px solid purple",
-      fontWeight: "700px",
+      fontWeight: "700",
       color: "purple",
     };
   } else {
