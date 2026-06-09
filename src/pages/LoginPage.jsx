@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {useNavigate, useLocation} from "react-router"
+import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage({}) {
@@ -20,11 +20,11 @@ export default function LoginPage({}) {
       if (!result.success) {
         throw new Error();
       }
-      console.log(path.state)
-      if(path.state?.pathname) {
-        navigate(path.state?.pathname)
+      console.log(path.state);
+      if (path.state?.pathname) {
+        navigate(path.state?.pathname);
       } else {
-        navigate("/todos")
+        navigate("/todos");
       }
     } catch (error) {
       setAuthError("Cannot log in");

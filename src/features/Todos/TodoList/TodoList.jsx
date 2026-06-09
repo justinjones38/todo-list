@@ -6,7 +6,7 @@ export default function TodoList({
   onCompleteTodo,
   onUpdateTodo,
   dataVersion,
-  statusFilter="active"
+  statusFilter = "active",
 }) {
   // const filteredTodoList = todoList.filter((item) => !item.isCompleted);
   const filteredTodoList = useMemo(() => {
@@ -14,14 +14,14 @@ export default function TodoList({
       - Status: ${statusFilter}`);
 
     let filteredTodos;
-    switch(statusFilter) {
+    switch (statusFilter) {
       case "completed":
         filteredTodos = todoList.filter((todo) => todo.isCompleted);
         break;
 
       case "active":
         filteredTodos = todoList.filter((todo) => !todo.isCompleted);
-        break
+        break;
 
       default:
         filteredTodos = [...todoList];
@@ -29,20 +29,20 @@ export default function TodoList({
     }
     return {
       version: dataVersion,
-      todos: filteredTodos
+      todos: filteredTodos,
     };
   }, [dataVersion, todoList, statusFilter]);
 
   const getEmptyMessage = () => {
-    switch(statusFilter) {
+    switch (statusFilter) {
       case "completed":
         return `No Completed todos yet. Complete some tasks to see them here`;
       case "active":
         return `No active todos. Add a todo above to get started`;
       default:
-        return `Add todo above to get started`
+        return `Add todo above to get started`;
     }
-  }
+  };
   return filteredTodoList.todos.length === 0 ? (
     <p>{getEmptyMessage()}</p>
   ) : (

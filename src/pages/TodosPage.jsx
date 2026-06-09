@@ -1,4 +1,4 @@
-import {useSearchParams} from "react-router";
+import { useSearchParams } from "react-router";
 import StatusFilter from "../shared/StatusFilter";
 
 import TodoList from "../features/Todos/TodoList/TodoList";
@@ -19,7 +19,7 @@ export default function TodosPage() {
   const { token } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const statusFilter = searchParams.get("status") || "all"
+  const statusFilter = searchParams.get("status") || "all";
 
   const {
     todoList,

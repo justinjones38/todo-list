@@ -12,6 +12,7 @@ nav ul a {
   transition: 0.4s color;
 }
 
-nav ul a:hover, nav ul a:focus {
+nav ul a:hover,
+nav ul a:focus {
   color: purple;
 }

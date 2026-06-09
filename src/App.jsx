@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import {Routes, Route} from "react-router";
+import { Routes, Route } from "react-router";
 import Header from "./shared/Header";
 import RequireAuth from "./components/RequireAuth.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
@@ -11,7 +11,6 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import TodosPage from "./pages/TodosPage";
 
 export default function App() {
-
   return (
     <>
       <Header />
