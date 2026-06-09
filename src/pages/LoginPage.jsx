@@ -7,12 +7,12 @@ export default function LoginPage({}) {
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
-  const {login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const path = useLocation();
   const navigate = useNavigate();
 
-  if(isAuthenticated) {
-    return <Navigate to="/todos" />
+  if (isAuthenticated) {
+    return <Navigate to="/todos" />;
   }
 
   const handleSubmit = async (event) => {
@@ -29,7 +29,6 @@ export default function LoginPage({}) {
       } else {
         navigate("/todos");
       }
-
     } catch (error) {
       setAuthError("Cannot log in");
       return;

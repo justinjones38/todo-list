@@ -10,8 +10,6 @@ export default function TodoList({
 }) {
   // const filteredTodoList = todoList.filter((item) => !item.isCompleted);
   const filteredTodoList = useMemo(() => {
-
-
     let filteredTodos;
     switch (statusFilter) {
       case "completed":

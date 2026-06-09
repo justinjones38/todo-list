@@ -55,7 +55,11 @@ export default function ProfilePage() {
           <p>Total Todos: {todoStats.total}</p>
           <p>Completed Todos: {todoStats.completed}</p>
           <p>Active Todos: {todoStats.active}</p>
-          <p>You have completed {Math.round((todoStats.completed/todoStats.total)* 100)}% of todos</p>
+          <p>
+            You have completed{" "}
+            {Math.round((todoStats.completed / todoStats.total) * 100)}% of
+            todos
+          </p>
         </>
       ) : null}
     </div>
