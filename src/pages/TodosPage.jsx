@@ -1,6 +1,8 @@
+import {useSearchParams} from "react-router";
+import StatusFilter from "../shared/StatusFilter";
+
 import TodoList from "../features/Todos/TodoList/TodoList";
 import TodoForm from "../features/Todos/TodoForm";
-
 import { useState, useEffect, useCallback, useReducer } from "react";
 import useDebounce from "../utils/useDebounce";
 import SortBy from "../shared/SortBy";
@@ -15,7 +17,9 @@ import { useAuth } from "../contexts/AuthContext";
 export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const { token } = useAuth();
-  console.log("ran");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const statusFilter = searchParams.get("status") || "all"
 
   const {
     todoList,
@@ -204,6 +208,7 @@ export default function TodosPage() {
         dispatch={dispatch}
         sortDirection={sortDirection}
       />
+      <StatusFilter />
       <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
       <TodoForm onAddTodo={addTodo} />
       <TodoList
@@ -211,6 +216,7 @@ export default function TodosPage() {
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
         dataVersion={dataVersion}
+        statusFilter={statusFilter}
       />
       {error ? (
         <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>

@@ -13,7 +13,7 @@ export default function HomePage() {
     } else {
       navigate("/login", {replace: true});
     }
-  })
+  }, [isAuthenticated, navigate])
   return (
     <div>
       <p>Redirecting...</p>

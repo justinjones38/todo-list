@@ -4,10 +4,13 @@ import { useAuth } from "../contexts/AuthContext";
 import {Navigate} from "react-router"
 
 export default function RequireAuth({children}){
-  const {isAuthenticated} = useAuth();
+  const {isAuthenticated, loading} = useAuth();
   const {pathname} = useLocation();
 
   console.log((isAuthenticated));
+  if(loading) {
+    return <h2>Loading</h2>
+  }
 
     if(!isAuthenticated) {
       <h2>Loading ...</h2>
