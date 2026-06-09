@@ -9,7 +9,6 @@ export default function ProfilePage() {
   const [error, setError] = useState("");
   const { token } = useAuth();
   useEffect(() => {
-    console.log("effect ran");
     const fetchTodoStats = async () => {
       if (!token) {
         return;
@@ -22,7 +21,7 @@ export default function ProfilePage() {
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         };
-        const response = await fetch("api/tasks?limit=100", options);
+        const response = await fetch("/api/tasks?limit=100", options);
 
         if (response.status === 401) {
           throw new Error("Unauthorized");
@@ -32,7 +31,6 @@ export default function ProfilePage() {
         }
         const resJson = await response.json();
         const todos = resJson.tasks;
-        console.log(todos);
         const total = todos.length;
         const completed = todos.filter((todo) => todo.isCompleted).length;
 

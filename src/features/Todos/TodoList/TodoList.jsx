@@ -10,8 +10,7 @@ export default function TodoList({
 }) {
   // const filteredTodoList = todoList.filter((item) => !item.isCompleted);
   const filteredTodoList = useMemo(() => {
-    console.log(`Recalculating filtered todos (v${dataVersion}) 
-      - Status: ${statusFilter}`);
+
 
     let filteredTodos;
     switch (statusFilter) {

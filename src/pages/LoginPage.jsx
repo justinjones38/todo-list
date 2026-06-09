@@ -7,10 +7,13 @@ export default function LoginPage({}) {
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
-  const { login, isAuthenticated } = useAuth();
+  const {login, isAuthenticated } = useAuth();
   const path = useLocation();
-  console.log(path);
   const navigate = useNavigate();
+
+  if(isAuthenticated) {
+    return <Navigate to={path.state?.pathname} />
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,12 +23,13 @@ export default function LoginPage({}) {
       if (!result.success) {
         throw new Error();
       }
-      console.log(path.state);
+
       if (path.state?.pathname) {
         navigate(path.state?.pathname);
       } else {
         navigate("/todos");
       }
+
     } catch (error) {
       setAuthError("Cannot log in");
       return;
