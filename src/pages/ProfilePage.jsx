@@ -7,7 +7,7 @@ export default function ProfilePage() {
   const [todoStats, setTodoStats] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { token } = useAuth();
+  const { email, token } = useAuth();
   useEffect(() => {
     const fetchTodoStats = async () => {
       if (!token) {
@@ -51,9 +51,11 @@ export default function ProfilePage() {
       {!loading && !error && todoStats ? (
         <>
           <h1>Profile Page</h1>
+          <p>Hi {email}</p>
           <p>Total Todos: {todoStats.total}</p>
           <p>Completed Todos: {todoStats.completed}</p>
           <p>Active Todos: {todoStats.active}</p>
+          <p>You have completed {Math.round((todoStats.completed/todoStats.total)* 100)}</p>
         </>
       ) : null}
     </div>

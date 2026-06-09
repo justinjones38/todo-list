@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation, Navigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage({}) {
@@ -12,7 +12,7 @@ export default function LoginPage({}) {
   const navigate = useNavigate();
 
   if(isAuthenticated) {
-    return <Navigate to={path.state?.pathname} />
+    return <Navigate to="/todos" />
   }
 
   const handleSubmit = async (event) => {
