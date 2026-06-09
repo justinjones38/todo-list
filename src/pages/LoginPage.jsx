@@ -20,6 +20,7 @@ export default function LoginPage({}) {
       if (!result.success) {
         throw new Error();
       }
+      console.log(path.state)
       if(path.state?.pathname) {
         navigate(path.state?.pathname)
       } else {

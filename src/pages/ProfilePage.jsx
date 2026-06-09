@@ -4,11 +4,12 @@ import {useState, useEffect} from "react";
 
 export default function ProfilePage() {
   const userInfo = useLocation();
-  const [todoStats, setTodoStats] = useState({})
+  const [todoStats, setTodoStats] = useState(null)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const {token} = useAuth();
   useEffect(() => {
+    console.log("effect ran")
     const fetchTodoStats = async() => {
       if(!token) {
         return;
@@ -21,18 +22,19 @@ export default function ProfilePage() {
           headers: {"X-CSRF-TOKEN": token},
           credentials: "include",
         }
-        const response = await fetch("api/tasks", options);
+        const response = await fetch("api/tasks?limit=100", options);
+        
         if(response.status === 401) {
           throw new Error("Unauthorized");
         } 
         if(!response.ok) {
           throw new Error("Failed to fetch todos");
         }
-        const todos = await response.json();
-
+        const resJson = await response.json();
+        const todos = resJson.tasks;
+        console.log(todos);
         const total = todos.length;
         const completed = todos.filter((todo) => todo.isCompleted).length
-        console.log(total);
 
         const active = total - completed;
         setTodoStats({total, completed, active});
@@ -46,10 +48,16 @@ export default function ProfilePage() {
   }, [token])
   return (
     <div>
-      <h1>Profile Page</h1>
-      <p>Total Todos: {todoStats.total}</p>
-      <p>Completed Todos: {todoStats.completed}</p>
-      <p>Active Todos: {todoStats.active}</p>
+      {loading ? <h2>Loading...</h2> : null}
+      {error ? <h2>Cannot fetch profile stats</h2> : null}
+      {!loading && !error && todoStats ? 
+      <>
+        <h1>Profile Page</h1>
+        <p>Total Todos: {todoStats.total}</p>
+        <p>Completed Todos: {todoStats.completed}</p>
+        <p>Active Todos: {todoStats.active}</p>       
+      </>
+: null}
     </div>
   )
 }

@@ -201,8 +201,6 @@ export default function TodosPage() {
   };
   return (
     <div>
-      {error ? <h2>{error}</h2> : null}
-      {isTodoListLoading ? <h2>Loading...</h2> : null}
       <SortBy
         sortBy={sortBy}
         dispatch={dispatch}
@@ -211,6 +209,8 @@ export default function TodosPage() {
       <StatusFilter />
       <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
       <TodoForm onAddTodo={addTodo} />
+      {error ? <h2>{error}</h2> : null}
+      {isTodoListLoading ? <h2>Loading...</h2> : null}
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
