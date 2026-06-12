@@ -1,19 +1,25 @@
-import TodoList from "./TodoList/TodoList";
-import TodoForm from "./TodoForm";
+import { useSearchParams } from "react-router";
+import StatusFilter from "../shared/StatusFilter";
+
+import TodoList from "../features/Todos/TodoList/TodoList";
+import TodoForm from "../features/Todos/TodoForm";
 import { useState, useEffect, useCallback, useReducer } from "react";
-import useDebounce from "../../utils/useDebounce";
-import SortBy from "../../shared/SortBy";
-import FilterInput from "../../shared/FilterInput";
+import useDebounce from "../utils/useDebounce";
+import SortBy from "../shared/SortBy";
+import FilterInput from "../shared/FilterInput";
 import {
   initialTodoState,
   todoReducer,
   TODO_ACTIONS,
-} from "../../reducers/todoReducer";
-import { useAuth } from "../../contexts/AuthContext";
+} from "../reducers/todoReducer";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const { token } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const statusFilter = searchParams.get("status") || "all";
 
   const {
     todoList,
@@ -195,20 +201,22 @@ export default function TodosPage() {
   };
   return (
     <div>
-      {error ? <h2>{error}</h2> : null}
-      {isTodoListLoading ? <h2>Loading...</h2> : null}
       <SortBy
         sortBy={sortBy}
         dispatch={dispatch}
         sortDirection={sortDirection}
       />
+      <StatusFilter />
       <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
       <TodoForm onAddTodo={addTodo} />
+      {error ? <h2>{error}</h2> : null}
+      {isTodoListLoading ? <h2>Loading...</h2> : null}
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
         dataVersion={dataVersion}
+        statusFilter={statusFilter}
       />
       {error ? (
         <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
