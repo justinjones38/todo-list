@@ -14,9 +14,17 @@
   background-color: var(--primary-btn-bg-color);
   color: var(--primary-btn-text-color);
   min-width: 125px;
-  width: 50%;
   padding: 0.75em 1.5em;
   border: none;
   border-radius: 6px;
   flex: 0;
+  transition: 0.3s background-color;
+}
+
+.btn:focus, .btn:hover {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+.btn:disabled {
+  background-color: var(--primary-btn-bg-disabled-color);
 }

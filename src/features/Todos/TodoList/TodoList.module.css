@@ -1,0 +1,17 @@
+.emptyMessage {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.todoList {
+  display: grid;
+  width: 96%;
+  max-width: 1000px;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  text-align: center;
+  row-gap: 1.5em;
+  column-gap: 3em;
+
+}

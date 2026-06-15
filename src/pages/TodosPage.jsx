@@ -129,7 +129,8 @@ export default function TodosPage() {
     }
   };
 
-  const completeTodo = async (id) => {
+  const completeTodo = async (id, e) => {
+    e.preventDefault();
     const originalTodos = [...todoList];
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {
