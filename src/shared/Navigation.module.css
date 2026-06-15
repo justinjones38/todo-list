@@ -33,7 +33,7 @@
 }
 
 .closeBtn:active, .closeBtn:focus {
-  color: var(--close-btn-error-hover);
+  color: var(--red-btn);
 }
 
 
@@ -43,7 +43,6 @@
   align-items: center;
   justify-content: center;
   font-size: 2.5rem;
-  gap: 1.25em;
 }
 
 .navLink {
@@ -72,6 +71,7 @@
     min-width: 200px;
     font-size: 1.25rem;
     justify-content: space-between;
+    gap: 2em;
   }
 
   .closeBtnContainer {

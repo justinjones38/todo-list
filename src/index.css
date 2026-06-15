@@ -29,6 +29,8 @@ CSS VARIABLES
   --primary-btn-bg-disabled-color: #072c5067;
   --primary-btn-text-color: #FCFCFC;
   --close-btn-error-hover: #9E0000;
+  --red-btn: #9E0000;
+  --red-btn-hover: #c95454;
 
 
   /* Reusable Styles */

@@ -6,12 +6,13 @@ import styles from "./Header.module.css";
 export default function Header() {
   const { token, isAuthenticated } = useAuth();
   return (
-    <div className={styles.container}>
-      <div className={styles.contentWrapper}>
-        <h1 className={styles.title}>Todo List</h1>
-        <Navigation />
-        {isAuthenticated ? <Logoff /> : null}
+      <div className={styles.container}>
+        <div className={styles.contentWrapper}>
+          <h1 className={styles.title}>Todo List</h1>
+          {isAuthenticated ? <Logoff /> : null}
+          <Navigation />
+        </div>
       </div>
-    </div>
+
   );
 }

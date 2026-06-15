@@ -1,0 +1,21 @@
+
+.logoffBtn {
+  background-color: var(--red-btn);
+  color: var(--primary-btn-text-color);
+  font-size: 1.1rem;
+  padding: 0.4em 0.8em;
+  border-radius: 8px;
+  border: none;
+  transition: 0.3s background-color;
+  margin-left: 1.2em;
+}
+
+.logoffBtn:hover, .logoffBtn:focus {
+  background-color: var(--red-btn-hover);
+}
+
+@media (min-width: 600px) {
+  .logoffBtn {
+    order: 10;
+  };
+}
