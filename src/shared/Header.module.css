@@ -1,6 +1,7 @@
 .container {
   background-color: var(--nav-bg-color);
   color: var(--nav-text-color);
+  margin-bottom: 1.25em;
 }
 
 .contentWrapper {

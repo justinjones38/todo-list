@@ -25,12 +25,14 @@ CSS VARIABLES
   /* Buttons  */
   --primary-btn-bg-color: #072B50;
   --primary-btn-bg-hover-color: #16599c;
+  --primary-btn-bg-disabled-color: #072c5067;
   --primary-btn-text-color: #FCFCFC;
   --close-btn-error-hover: #9E0000;
 
 
   /* Reusable Styles */
   --border-color: #FCFCFC;
+  --black-border: #1A1A1A
 }
 
 
@@ -59,6 +61,10 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+label, input {
+  display: block;
 }
 
 
