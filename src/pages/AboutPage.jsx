@@ -1,7 +1,7 @@
 export default function AboutPage() {
   return (
     <div>
-      <h1>About page</h1>
+      <h2>About page</h2>
       <p>
         This todo site is a todo-page that allows you to add/remove items that
         you need to do

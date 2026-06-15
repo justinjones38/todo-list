@@ -13,18 +13,18 @@ export default function Navigation() {
   const [isHamburgerMenuShown, setIsHamburgerMenuShown] = useState(true);
   return (
     <nav className={styles.navContainer}>
-      {isHamburgerMenuShown ? 
+      {isHamburgerMenuShown && windowWidth < 600 ? 
       <div className={styles.hamburgerMenuContainer}>
-        <RxHamburgerMenu onClick={() => setIsHamburgerMenuShown(false)} />
+        <RxHamburgerMenu onClick={() => setIsHamburgerMenuShown(false)} className={styles.hamburgerMenu} />
       </div>
       :
       <div className={styles.menuContainer}>
       <div className={styles.closeBtnContainer}>
-        <IoMdClose onClick={() => setIsHamburgerMenuShown(true)} />
+        <IoMdClose onClick={() => setIsHamburgerMenuShown(true)} className={styles.closeBtn} />
       </div>
       <ul className={styles.navList}>
         <li className={styles.navItem} onClick={() => setIsHamburgerMenuShown(true)}>
-          <NavLink to="/about" className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`} >
+          <NavLink to="/about" className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`} >
             About
           </NavLink>{" "}
         </li>
@@ -34,7 +34,7 @@ export default function Navigation() {
               <NavLink
                 to="/todos"
                 onClick={() => setIsHamburgerMenuShown(true)}
-                className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
+                className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Todos
               </NavLink>
@@ -43,7 +43,7 @@ export default function Navigation() {
               <NavLink
                 to="/profile"
                 onClick={() => setIsHamburgerMenuShown(true)}
-                className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
+                className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Profile
               </NavLink>{" "}
@@ -55,7 +55,7 @@ export default function Navigation() {
               <NavLink
                 to="/login"
                 onClick={() => setIsHamburgerMenuShown(true)}
-                className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
+                className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Login
               </NavLink>

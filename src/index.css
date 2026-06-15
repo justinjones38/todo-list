@@ -19,12 +19,14 @@ CSS VARIABLES
   /* Text Colors */
   --primary-text-color: #1A1A1A;
   --nav-text-color: #FCFCFC;
+  --error-text-color: #9E0000;
 
 
   /* Buttons  */
   --primary-btn-bg-color: #072B50;
   --primary-btn-bg-hover-color: #16599c;
   --primary-btn-text-color: #FCFCFC;
+  --close-btn-error-hover: #9E0000;
 
 
   /* Reusable Styles */
@@ -67,4 +69,9 @@ h1 {
   color: var(--nav-text-color);
   font-weight: 700;
   font-size: 2rem;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 500;
 }

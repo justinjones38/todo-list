@@ -23,6 +23,15 @@
   margin-bottom: 1em;
 }
 
+.closeBtn {
+  transition: 0.3s color;
+}
+
+.closeBtn:active, .closeBtn:focus {
+  color: var(--close-btn-error-hover);
+}
+
+
 .navList {
   display: flex;
   flex-direction: column;
@@ -46,7 +55,18 @@
 }
 
 @media (min-width: 600px) {
+  .menuContainer, .navList {
+    all: unset;
+  }
   .navList {
-    gap: 5em;
+    display: flex;
+    list-style-type: none;
+    min-width: 200px;
+    font-size: 1.25rem;
+    justify-content: space-between;
+  }
+
+  .closeBtnContainer {
+    display: none;
   }
 }
