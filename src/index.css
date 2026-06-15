@@ -47,6 +47,10 @@ button {
   display: block;
 }
 
+svg {
+  display: block;
+}
+
 a, button {
   font-family: inherit;
   text-decoration: none;

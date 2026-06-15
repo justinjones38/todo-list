@@ -1,14 +1,22 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import { useState } from "react";
 import styles from "./Navigation.module.css"
-
-
+import { RxHamburgerMenu } from "react-icons/rx";
+import useWindowWidth from "../hooks/useWindowWidth";
 
 
 export default function Navigation() {
   const { isAuthenticated } = useAuth();
+  const windowWidth = useWindowWidth();
+  const [isHamburgerMenuShown, setIsHamburgerMenuShown] = useState(true);
   return (
     <nav className={styles.navContainer}>
+      {isHamburgerMenuShown ? 
+      <div className={styles.hamburgerMenu} onClick={() => setIsHamburgerMenuShown(false)}>
+        <RxHamburgerMenu />
+      </div>
+      :
       <ul className={styles.navList}>
         <li className={styles.navItem}>
           <NavLink to="/about" className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`} >
@@ -46,7 +54,7 @@ export default function Navigation() {
             </li>
           </>
         )}
-      </ul>
+      </ul>}
     </nav>
   );
 }

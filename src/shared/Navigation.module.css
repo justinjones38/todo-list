@@ -2,12 +2,11 @@
   margin-left: auto;
 }
 
-.navList {
-  font-size: 1.25rem;
-  display: flex;
-  gap: 2em;
+.hamburgerMenu {
+  font-size: 2.2rem;
 }
 
+.navLi
 
 .navLink {
   color: var(--nav-text-color);
