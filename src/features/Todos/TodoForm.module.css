@@ -1,9 +1,14 @@
 .form {
-  width: 93%;
-  margin: 0 auto;
-  max-width: 300px;
+  margin-top: 0.75em;
 }
 
-input {
-  width: 85%;
+.btn {
+  background-color: var(--primary-btn-bg-color);
+  color: var(--primary-btn-text-color);
+  min-width: 125px;
+  margin: 0 auto;
+  width: 50%;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 6px;
 }

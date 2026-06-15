@@ -11,7 +11,12 @@
   width: 98%;
   margin: 0 auto;
   margin-bottom: 0.8em;
+}
 
+.textInputContainer {
+  width: 96%;
+  max-width: 600px;
+  margin: 0 auto 1em auto;
 }
 
 @media (min-width: 600px) {

@@ -209,8 +209,11 @@ export default function TodosPage() {
         />
         <StatusFilter />
       </div>
-      <FilterInput filterTerm={filterTerm} dispatch={dispatch} />        
-      <TodoForm onAddTodo={addTodo} />
+      <div className={styles.textInputContainer}>
+        <FilterInput filterTerm={filterTerm} dispatch={dispatch} />        
+        <TodoForm onAddTodo={addTodo} />
+      </div>
+
       {error ? <h2>{error}</h2> : null}
       {isTodoListLoading ? <h2>Loading...</h2> : null}
       <TodoList
