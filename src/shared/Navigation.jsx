@@ -1,44 +1,34 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import styles from "./Navigation.module.css"
 
-const navLinkStyle = (isActive) => {
-  if (isActive) {
-    return {
-      borderBottom: "2px solid purple",
-      fontWeight: "700",
-      color: "purple",
-    };
-  } else {
-    return {
-      color: "black",
-    };
-  }
-};
+
+
 
 export default function Navigation() {
   const { isAuthenticated } = useAuth();
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/about" style={({ isActive }) => navLinkStyle(isActive)}>
+    <nav className={styles.navContainer}>
+      <ul className={styles.navList}>
+        <li className={styles.navItem}>
+          <NavLink to="/about" className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`} >
             About
           </NavLink>{" "}
         </li>
         {isAuthenticated ? (
           <>
-            <li>
+            <li className={styles.navItem}>
               <NavLink
                 to="/todos"
-                style={({ isActive }) => navLinkStyle(isActive)}
+                className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Todos
               </NavLink>
             </li>
-            <li>
+            <li className={styles.navItem}>
               <NavLink
                 to="/profile"
-                style={({ isActive }) => navLinkStyle(isActive)}
+                className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Profile
               </NavLink>{" "}
@@ -46,10 +36,10 @@ export default function Navigation() {
           </>
         ) : (
           <>
-            <li>
+            <li className={styles.navItem}>
               <NavLink
                 to="/login"
-                style={({ isActive }) => navLinkStyle(isActive)}
+                className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Login
               </NavLink>

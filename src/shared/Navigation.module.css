@@ -1,0 +1,29 @@
+.navContainer {
+  margin-left: auto;
+}
+
+.navList {
+  font-size: 1.25rem;
+  display: flex;
+  gap: 2em;
+}
+
+
+.navLink {
+  color: var(--nav-text-color);
+  transition: 0.3s border-bottom;
+}
+
+.navLink:focus, .navLink:hover {
+  border-bottom: 4px solid var(--border-color);
+}
+
+.navLink.active {
+  border-bottom: 4px solid var(--border-color);
+}
+
+@media (min-width: 600px) {
+  .navList {
+    gap: 5em;
+  }
+}

@@ -1,18 +1,69 @@
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
+/* ===========
+RESET CSS
+==============*/
+*, *::before, *::after {
+  margin: 0;
   padding: 0;
-  color: black;
+  box-sizing: border-box;
 }
 
-nav ul a {
-  color: black;
+
+/* ===========
+CSS VARIABLES
+==============*/
+:root {
+  /* Background Colors */
+  --bg-color: #FAFAFA;
+  --nav-bg-color: #072B50;
+
+  /* Text Colors */
+  --primary-text-color: #1A1A1A;
+  --nav-text-color: #FCFCFC;
+
+
+  /* Buttons  */
+  --primary-btn-bg-color: #072B50;
+  --primary-btn-bg-hover-color: #16599c;
+  --primary-btn-text-color: #FCFCFC;
+
+
+  /* Reusable Styles */
+  --border-color: #FCFCFC;
+}
+
+
+/* ===========
+GENERAL LAYOUT
+==============*/
+body {
+  line-height: 1.6;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  color: var(--primary-text-color);
+  font-family: "Inter", sans-serif, Arial, Helvetica 
+}
+
+button {
+  display: block;
+}
+
+a, button {
+  font-family: inherit;
   text-decoration: none;
-  transition: 0.4s color;
 }
 
-nav ul a:hover,
-nav ul a:focus {
-  color: purple;
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ===========
+TYPOGRAPHY
+==============*/
+h1 {
+  color: var(--nav-text-color);
+  font-weight: 700;
+  font-size: 2rem;
 }
