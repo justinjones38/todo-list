@@ -59,9 +59,10 @@ export default function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                   <button className={styles.editTodo} onClick={() => startEditing()}>Edit</button>
                   <button 
                     onClick={(e) => onCompleteTodo(todo.id, e)}
+                    disabled={todo.isCompleted}
                     className={`${styles["todoBtn"]} ${todo.isCompleted ? `${styles["completed"]}` : `${styles["notCompleted"]}`}`}
                     >
-                      {todo.isCompleted ? "todo completed" : "todo not completed"}
+                      {todo.isCompleted ? "completed" : "not completed"}
                       
                   </button>
               </div>
