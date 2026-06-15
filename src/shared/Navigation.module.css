@@ -8,6 +8,7 @@
 }
 
 .menuContainer {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,6 +16,10 @@
   width: 100%;
   background-color: var(--nav-bg-color);
   padding: 0.25em;
+}
+
+.menuContainer.active {
+  display: block;
 }
 
 .closeBtnContainer {
@@ -55,6 +60,9 @@
 }
 
 @media (min-width: 600px) {
+  .hamburgerMenuContainer, .closeBtnContainer {
+    display: none;
+  }
   .menuContainer, .navList {
     all: unset;
   }

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Navigation.module.css"
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
@@ -10,20 +10,19 @@ import useWindowWidth from "../hooks/useWindowWidth";
 export default function Navigation() {
   const { isAuthenticated } = useAuth();
   const windowWidth = useWindowWidth();
-  const [isHamburgerMenuShown, setIsHamburgerMenuShown] = useState(true);
+  const [isHamburgerMenuShown, setIsHamburgerMenuShown] = useState(false);
+
   return (
     <nav className={styles.navContainer}>
-      {isHamburgerMenuShown && windowWidth < 600 ? 
       <div className={styles.hamburgerMenuContainer}>
-        <RxHamburgerMenu onClick={() => setIsHamburgerMenuShown(false)} className={styles.hamburgerMenu} />
+        <RxHamburgerMenu onClick={() => setIsHamburgerMenuShown(true)} className={styles.hamburgerMenu} />
       </div>
-      :
-      <div className={styles.menuContainer}>
+      <div className={`${styles["menuContainer"]} ${isHamburgerMenuShown ? `${styles["active"]}` : "" }`}>
       <div className={styles.closeBtnContainer}>
-        <IoMdClose onClick={() => setIsHamburgerMenuShown(true)} className={styles.closeBtn} />
+        <IoMdClose onClick={() => setIsHamburgerMenuShown(false)} className={styles.closeBtn} />
       </div>
       <ul className={styles.navList}>
-        <li className={styles.navItem} onClick={() => setIsHamburgerMenuShown(true)}>
+        <li className={styles.navItem} onClick={() => setIsHamburgerMenuShown(false)}>
           <NavLink to="/about" className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`} >
             About
           </NavLink>{" "}
@@ -33,7 +32,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <NavLink
                 to="/todos"
-                onClick={() => setIsHamburgerMenuShown(true)}
+                onClick={() => setIsHamburgerMenuShown(false)}
                 className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Todos
@@ -42,7 +41,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <NavLink
                 to="/profile"
-                onClick={() => setIsHamburgerMenuShown(true)}
+                onClick={() => setIsHamburgerMenuShown(false)}
                 className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Profile
@@ -54,7 +53,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <NavLink
                 to="/login"
-                onClick={() => setIsHamburgerMenuShown(true)}
+                onClick={() => setIsHamburgerMenuShown(false)}
                 className={({isActive}) => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Login
@@ -63,7 +62,7 @@ export default function Navigation() {
           </>
         )}
       </ul>
-      </div>}
+      </div>
     </nav>
   );
 }

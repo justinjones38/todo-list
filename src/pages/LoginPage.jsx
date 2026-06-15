@@ -22,6 +22,8 @@ export default function LoginPage({}) {
     try {
       const result = await login(email, password);
       if (!result.success) {
+        setEmail('');
+        setPassword('');
         throw new Error();
       }
 
@@ -40,7 +42,7 @@ export default function LoginPage({}) {
 
   return (
     <div className={styles.container}>
-      {authError ? <p>{authError}</p> : null}
+      {authError ? <p className={styles.errorText}>{authError}</p> : null}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formElements}>
           <label htmlFor="email" className={styles.label}>Email</label>
