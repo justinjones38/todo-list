@@ -8,9 +8,13 @@ export default function Header() {
   return (
       <div className={styles.container}>
         <div className={styles.contentWrapper}>
-          <h1 className={styles.title}>Todo List</h1>
-          {isAuthenticated ? <Logoff /> : null}
-          <Navigation />
+          <div className={styles.leftNav}>
+            <h1 className={styles.title}>Todo List</h1>
+          </div>
+          <div className={styles.rightNav}>
+            {isAuthenticated ? <Logoff /> : null}
+            <Navigation />
+          </div>
         </div>
       </div>
 

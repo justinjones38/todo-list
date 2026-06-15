@@ -10,13 +10,15 @@
   width: 99%;
   margin: 0 auto;
   justify-content: space-between;
+}
+
+.rightNav {
+  display: flex;
   gap: 2.5em;
 }
 
 @media (min-width: 600px) {
-  .contentWrapper {
-    width: 97%;
-    margin: unset;
-    margin: 0 auto;
+  .rightNav {
+    gap: 1.5em;
   }
 }
