@@ -131,6 +131,10 @@ export default function TodosPage() {
 
   const completeTodo = async (id, e) => {
     e.preventDefault();
+    const confirm = window.confirm("Do you want to mark the todo as completed?");
+    if(!confirm) {
+      return;
+    }
     const originalTodos = [...todoList];
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {

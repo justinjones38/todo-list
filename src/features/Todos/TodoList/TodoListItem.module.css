@@ -11,6 +11,7 @@
   border-radius: 6px;
   color: var(--primary-btn-text-color);
   transition: 0.3s background-color;
+  font-size: 1rem;
 }
 
 .cancelBtn {
@@ -33,25 +34,52 @@
 .todoItem {
   padding: 0.5em 1em;
   border: 1px solid var(--black-border);
+  max-width: 275px;
+  margin: 0 auto;
+  border-radius: 6px;
 }
 
-/* .todoItem:has(input:checked) {
-  background-color: var(--primary-btn-bg-color);
-  color: var(--primary-btn-text-color)
-} */
-
-.checkbox {
-  display: none;
-}
 
 .title {
+  font-weight: 600;
+  font-size: 1.1rem;
   margin-bottom: 0.75em;
 }
 
-.editTodo {
+.todoBtnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1.25em;
+
+}
+
+.editTodo, .todoBtn {
   color: var(--primary-btn-text-color);
-  background-color: var(--primary-btn-bg-color);
   border: none;
-  padding: 0.75em 1.5em;
-  border-radius: 8px;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.editTodo {
+  background-color: var(--primary-btn-bg-color);
+  transition: 0.3s background-color;
+
+}
+
+.editTodo:focus, .editTodo:hover {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+.completed {
+  background-color: var(--green-btn);
+  cursor: default;
+}
+
+.notCompleted {
+  background-color: var(--red-btn);
+  transition: 0.3s background-color;
+}
+
+.notCompleted:focus, .notCompleted:hover {
+  background-color: var(--red-btn-hover);
 }

@@ -53,21 +53,19 @@ export default function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             </div>
           </>
         ) : (
-          <>
-            <label className={styles.todoItem}>
-              <input
-                type="checkbox"
-                id={`checkbox${todo.id}`}
-                checked={todo.isCompleted}
-                className={styles.checkbox}
-              />
+          <div className={styles.todoItem}>
               <p className={styles.title}>{todo.title}</p>
               <div className={styles.todoBtnContainer}>
                   <button className={styles.editTodo} onClick={() => startEditing()}>Edit</button>
-                  <button onClick={(e) => onCompleteTodo(todo.id, e)}>Complete todo</button>
+                  <button 
+                    onClick={(e) => onCompleteTodo(todo.id, e)}
+                    className={`${styles["todoBtn"]} ${todo.isCompleted ? `${styles["completed"]}` : `${styles["notCompleted"]}`}`}
+                    >
+                      {todo.isCompleted ? "todo completed" : "todo not completed"}
+                      
+                  </button>
               </div>
-            </label>
-          </>
+          </div>
         )}
       </form>
     </li>
