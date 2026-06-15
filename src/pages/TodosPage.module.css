@@ -1,0 +1,21 @@
+.container {
+  width: 98%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sortContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  width: 98%;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .sortContainer {
+    flex-direction: row;
+    max-width: 800px;
+    justify-content: space-evenly;
+  }
+}

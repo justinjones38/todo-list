@@ -55,6 +55,10 @@ button, svg {
   cursor: pointer;
 }
 
+select {
+  cursor: pointer;
+}
+
 a, button {
   font-family: inherit;
   text-decoration: none;

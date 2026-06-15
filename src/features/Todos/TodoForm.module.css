@@ -1,0 +1,9 @@
+.form {
+  width: 93%;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+input {
+  width: 85%;
+}

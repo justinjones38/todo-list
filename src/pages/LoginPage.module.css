@@ -25,6 +25,7 @@
   width: 100%;
   outline: none;
   border: 1px solid var(--black-border);
+  margin-bottom: 1.25em;
 }
 
 .label::after {

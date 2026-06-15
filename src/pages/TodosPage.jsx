@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router";
 import StatusFilter from "../shared/StatusFilter";
-
+import styles from "./TodosPage.module.css";
 import TodoList from "../features/Todos/TodoList/TodoList";
 import TodoForm from "../features/Todos/TodoForm";
 import { useState, useEffect, useCallback, useReducer } from "react";
@@ -200,14 +200,16 @@ export default function TodosPage() {
     }
   };
   return (
-    <div>
-      <SortBy
-        sortBy={sortBy}
-        dispatch={dispatch}
-        sortDirection={sortDirection}
-      />
-      <StatusFilter />
-      <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
+    <div className={styles.container}>
+      <div className={styles.sortContainer}>
+        <SortBy
+          sortBy={sortBy}
+          dispatch={dispatch}
+          sortDirection={sortDirection}
+        />
+        <StatusFilter />
+      </div>
+      <FilterInput filterTerm={filterTerm} dispatch={dispatch} />        
       <TodoForm onAddTodo={addTodo} />
       {error ? <h2>{error}</h2> : null}
       {isTodoListLoading ? <h2>Loading...</h2> : null}
