@@ -43,12 +43,9 @@ body {
   font-family: "Inter", sans-serif, Arial, Helvetica 
 }
 
-button {
+button, svg {
   display: block;
-}
-
-svg {
-  display: block;
+  cursor: pointer;
 }
 
 a, button {

@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import styles from "./Navigation.module.css"
 import { RxHamburgerMenu } from "react-icons/rx";
+import { IoMdClose } from "react-icons/io";
 import useWindowWidth from "../hooks/useWindowWidth";
 
 
@@ -13,12 +14,16 @@ export default function Navigation() {
   return (
     <nav className={styles.navContainer}>
       {isHamburgerMenuShown ? 
-      <div className={styles.hamburgerMenu} onClick={() => setIsHamburgerMenuShown(false)}>
-        <RxHamburgerMenu />
+      <div className={styles.hamburgerMenuContainer}>
+        <RxHamburgerMenu onClick={() => setIsHamburgerMenuShown(false)} />
       </div>
       :
+      <div className={styles.menuContainer}>
+      <div className={styles.closeBtnContainer}>
+        <IoMdClose onClick={() => setIsHamburgerMenuShown(true)} />
+      </div>
       <ul className={styles.navList}>
-        <li className={styles.navItem}>
+        <li className={styles.navItem} onClick={() => setIsHamburgerMenuShown(true)}>
           <NavLink to="/about" className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`} >
             About
           </NavLink>{" "}
@@ -28,6 +33,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <NavLink
                 to="/todos"
+                onClick={() => setIsHamburgerMenuShown(true)}
                 className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Todos
@@ -36,6 +42,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <NavLink
                 to="/profile"
+                onClick={() => setIsHamburgerMenuShown(true)}
                 className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Profile
@@ -47,6 +54,7 @@ export default function Navigation() {
             <li className={styles.navItem}>
               <NavLink
                 to="/login"
+                onClick={() => setIsHamburgerMenuShown(true)}
                 className={isActive => isActive ? `${styles["navLink"]} ${styles["active"]}` : `${styles["navLink"]}`}
               >
                 Login
@@ -54,7 +62,8 @@ export default function Navigation() {
             </li>
           </>
         )}
-      </ul>}
+      </ul>
+      </div>}
     </nav>
   );
 }
