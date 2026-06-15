@@ -10,6 +10,8 @@
   max-width: 300px;
   width: 98%;
   margin: 0 auto;
+  margin-bottom: 0.8em;
+
 }
 
 @media (min-width: 600px) {
