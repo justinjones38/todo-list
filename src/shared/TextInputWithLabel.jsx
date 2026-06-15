@@ -8,7 +8,7 @@ export default function TextInputWithLabel({
   value,
 }) {
   return (
-    <>
+    <div className={styles.formItem}>
       <label htmlFor={elementId} className={styles.label}>{labelText}</label>
       <input
         type="text"
@@ -19,6 +19,6 @@ export default function TextInputWithLabel({
         className={styles.input}
         placeholder="Add Todo"
       />
-    </>
+    </div>
   );
 }
