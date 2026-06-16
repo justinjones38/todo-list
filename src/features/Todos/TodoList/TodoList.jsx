@@ -9,7 +9,6 @@ export default function TodoList({
   dataVersion,
   statusFilter = "active",
 }) {
-  // const filteredTodoList = todoList.filter((item) => !item.isCompleted);
   const filteredTodoList = useMemo(() => {
     let filteredTodos;
     switch (statusFilter) {
@@ -41,7 +40,7 @@ export default function TodoList({
         return `Add todo above to get started`;
     }
   };
-  return filteredTodoList.todos.length === 0 ? (
+  return filteredTodoList.todos.length === 0  ? (
     <p className={styles.emptyMessage}>{getEmptyMessage()}</p>
   ) : (
     <div className={styles.container}>

@@ -4,18 +4,19 @@
   margin: 0 auto 1em auto;
 }
 
+.sortContainer, .textInputContainer {
+  max-width: 300px;
+  width: 98%;
+}
+
 .sortContainer {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
-  width: 98%;
   margin: 0 auto;
   margin-bottom: 0.8em;
 }
 
 .textInputContainer {
-  width: 96%;
-  max-width: 600px;
   margin: 0 auto 1em auto;
 }
 

@@ -48,7 +48,7 @@
 
 .todoBtnContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1.25em;
 
 }
@@ -56,18 +56,21 @@
 .editTodo, .todoBtn {
   color: var(--primary-btn-text-color);
   border: none;
-  padding: 0.5em 1em;
+  padding: 0.75em 1.25em;
   border-radius: 6px;
   font-size: 1rem;
 }
 .editTodo {
   background-color: var(--primary-btn-bg-color);
   transition: 0.3s background-color;
-
 }
 
 .editTodo:focus, .editTodo:hover {
   background-color: var(--primary-btn-bg-hover-color);
+}
+
+.editTodo, .todoBtn {
+  flex: 1;
 }
 
 .completed {

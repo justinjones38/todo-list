@@ -63,7 +63,6 @@ export default function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                     className={`${styles["todoBtn"]} ${todo.isCompleted ? `${styles["completed"]}` : `${styles["notCompleted"]}`}`}
                     >
                       {todo.isCompleted ? "completed" : "not completed"}
-                      
                   </button>
               </div>
           </div>
