@@ -1,18 +1,92 @@
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
+/* ===========
+RESET CSS
+==============*/
+*,
+*::before,
+*::after {
+  margin: 0;
   padding: 0;
-  color: black;
+  box-sizing: border-box;
 }
 
-nav ul a {
-  color: black;
+/* ===========
+CSS VARIABLES
+==============*/
+:root {
+  /* Background Colors */
+  --bg-color: #fafafa;
+  --nav-bg-color: #072b50;
+
+  /* Text Colors */
+  --primary-text-color: #1a1a1a;
+  --nav-text-color: #fcfcfc;
+  --error-text-color: #9e0000;
+  --important-text-color: #f76767;
+
+  /* Buttons  */
+  --primary-btn-bg-color: #072b50;
+  --primary-btn-bg-hover-color: #16599c;
+  --primary-btn-bg-disabled-color: #072c5067;
+  --primary-btn-text-color: #fcfcfc;
+  --close-btn-error-hover: #9e0000;
+  --red-btn: #9e0000;
+  --red-btn-hover: #c95454;
+  --green-btn: #154814;
+  --green-btn-hover: #3dcd3a;
+
+  /* Reusable Styles */
+  --border-color: #fcfcfc;
+  --black-border: #1a1a1a;
+}
+
+/* ===========
+GENERAL LAYOUT
+==============*/
+body {
+  line-height: 1.6;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  color: var(--primary-text-color);
+  font-family: "Inter", sans-serif, Arial, Helvetica;
+}
+
+button,
+svg {
+  display: block;
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
+}
+
+a,
+button {
+  font-family: inherit;
   text-decoration: none;
-  transition: 0.4s color;
 }
 
-nav ul a:hover,
-nav ul a:focus {
-  color: purple;
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+label,
+input {
+  display: block;
+}
+
+/* ===========
+TYPOGRAPHY
+==============*/
+h1 {
+  color: var(--nav-text-color);
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 500;
 }

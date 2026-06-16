@@ -1,0 +1,31 @@
+.container {
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
+  margin-bottom: 0.5em;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  width: 99%;
+  margin: 0 auto;
+  justify-content: space-between;
+  min-height: 60px;
+
+}
+
+.rightNav {
+  display: flex;
+  gap: 2.5em;
+  align-items: center;
+}
+
+@media (min-width: 600px) {
+  .rightNav {
+    gap: 1.5em;
+  }
+}

@@ -1,0 +1,31 @@
+.form {
+  margin-top: 0.75em;
+  width: 100%;
+}
+
+.formElements {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 0.25em;
+}
+
+.btn {
+  background-color: var(--primary-btn-bg-color);
+  color: var(--primary-btn-text-color);
+  min-width: 125px;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 6px;
+  flex: 0;
+  transition: 0.3s background-color;
+}
+
+.btn:focus,
+.btn:hover {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+.btn:disabled {
+  background-color: var(--primary-btn-bg-disabled-color);
+}

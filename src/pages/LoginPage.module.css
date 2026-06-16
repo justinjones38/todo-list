@@ -1,0 +1,57 @@
+.container {
+  width: 98%;
+  margin: 0 auto;
+  max-width: 275px;
+}
+
+.errorText {
+  color: var(--error-text-color);
+  text-align: center;
+}
+
+.formElements {
+  margin-bottom: 0.75em;
+}
+
+.label {
+  font-size: 1.1rem;
+}
+
+.input {
+  font-size: 1.1rem;
+  padding: 0.25em 0.5em;
+  min-height: 40px;
+  border-radius: 6px;
+  width: 100%;
+  outline: none;
+  border: 1px solid var(--black-border);
+  margin-bottom: 1.25em;
+}
+
+.label::after {
+  content: "*";
+  display: inline;
+  color: var(--important-text-color);
+}
+
+.loginBtn {
+  background-color: var(--primary-btn-bg-color);
+  color: var(--primary-btn-text-color);
+  font-size: 1.1rem;
+  padding: 0.5em 1em;
+  width: 60%;
+  min-width: 100px;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: none;
+  transition: 0.3s background-color;
+}
+
+.loginBtn:focus,
+.loginBtn:hover {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+.loginBtn:disabled {
+  background-color: var(--primary-btn-bg-disabled-color);
+}

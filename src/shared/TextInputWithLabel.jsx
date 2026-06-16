@@ -1,3 +1,5 @@
+import styles from "./TextInputWithLabel.module.css";
+
 export default function TextInputWithLabel({
   elementId,
   labelText,
@@ -6,15 +8,19 @@ export default function TextInputWithLabel({
   value,
 }) {
   return (
-    <>
-      <label htmlFor={elementId}>{labelText}</label>
+    <div className={styles.formItem}>
+      <label htmlFor={elementId} className={styles.label}>
+        {labelText}
+      </label>
       <input
         type="text"
         id={elementId}
         ref={ref}
         value={value}
         onChange={onChange}
+        className={styles.input}
+        placeholder="Add Todo"
       />
-    </>
+    </div>
   );
 }
