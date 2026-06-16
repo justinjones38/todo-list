@@ -29,7 +29,7 @@
 }
 
 .label::after {
-  content: "*";
+  content: " *";
   display: inline;
   color: var(--important-text-color);
 }
