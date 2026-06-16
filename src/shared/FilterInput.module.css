@@ -1,0 +1,18 @@
+.container {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5em 0.25em;
+  border-radius: 4px;
+  font-size: 1.05rem;
+  border: 1px solid var(--black-border);
+}
+
+@media (min-width: 600px) {
+  .container {
+    max-width: 350px;
+  }
+}

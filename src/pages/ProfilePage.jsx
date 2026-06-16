@@ -1,6 +1,7 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
+import styles from "./ProfilePage.module.css";
 
 export default function ProfilePage() {
   const userInfo = useLocation();
@@ -45,17 +46,26 @@ export default function ProfilePage() {
     fetchTodoStats();
   }, [token]);
   return (
-    <div>
+    <div className={styles.container}>
       {loading ? <h2>Loading...</h2> : null}
-      {error ? <h2>Cannot fetch profile stats</h2> : null}
+      {error ? (
+        <p className={styles.errorText}>
+          Server failure: cannot fetch profile stats. Please try again later
+        </p>
+      ) : null}
       {!loading && !error && todoStats ? (
         <>
-          <h1>Profile Page</h1>
-          <p>Hi {email}</p>
-          <p>Total Todos: {todoStats.total}</p>
-          <p>Completed Todos: {todoStats.completed}</p>
-          <p>Active Todos: {todoStats.active}</p>
-          <p>
+          <h2 className={styles.title}>{email}'s profile page</h2>
+          <p className={styles.stats}>
+            Total Todos: <span>{todoStats.total}</span>
+          </p>
+          <p className={styles.stats}>
+            Completed Todos: <span>{todoStats.completed}</span>
+          </p>
+          <p className={styles.stats}>
+            Active Todos: <span>{todoStats.active}</span>
+          </p>
+          <p className={styles.dataStats}>
             You have completed{" "}
             {Math.round((todoStats.completed / todoStats.total) * 100)}% of
             todos

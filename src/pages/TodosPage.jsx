@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router";
 import StatusFilter from "../shared/StatusFilter";
-
+import styles from "./TodosPage.module.css";
 import TodoList from "../features/Todos/TodoList/TodoList";
 import TodoForm from "../features/Todos/TodoForm";
 import { useState, useEffect, useCallback, useReducer } from "react";
@@ -124,12 +124,23 @@ export default function TodosPage() {
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
-        payload: { originalTodos, error: "Cannot add todo" },
+        payload: {
+          originalTodos,
+          error:
+            "Server failure, cannot add todo right now. Please try again later",
+        },
       });
     }
   };
 
-  const completeTodo = async (id) => {
+  const completeTodo = async (id, e) => {
+    e.preventDefault();
+    const confirm = window.confirm(
+      "Do you want to mark the todo as completed?",
+    );
+    if (!confirm) {
+      return;
+    }
     const originalTodos = [...todoList];
     const updatedTodos = todoList.map((item) => {
       if (item.id === id) {
@@ -200,44 +211,58 @@ export default function TodosPage() {
     }
   };
   return (
-    <div>
-      <SortBy
-        sortBy={sortBy}
-        dispatch={dispatch}
-        sortDirection={sortDirection}
-      />
-      <StatusFilter />
-      <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
-      <TodoForm onAddTodo={addTodo} />
-      {error ? <h2>{error}</h2> : null}
+    <div className={styles.container}>
+      <div className={styles.sortContainer}>
+        <SortBy
+          sortBy={sortBy}
+          dispatch={dispatch}
+          sortDirection={sortDirection}
+        />
+        <StatusFilter />
+      </div>
+      <div className={styles.textInputContainer}>
+        <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
+        <TodoForm onAddTodo={addTodo} />
+      </div>
+
+      {error ? <h2 className={styles.errorText}>{error}</h2> : null}
       {isTodoListLoading ? <h2>Loading...</h2> : null}
+      {error ? (
+        <button
+          className={styles.errorBtn}
+          onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
+        >
+          Clear Error
+        </button>
+      ) : null}
+      {filterError ? (
+        <div>
+          <p className={styles.errorText}>{filterError}</p>
+          <button
+            onClick={(e) => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
+            className={styles.errorBtn}
+          >
+            Clear Filter Error
+          </button>
+          <button
+            onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
+            className={styles.errorBtn}
+          >
+            Reset Filters
+          </button>
+        </div>
+      ) : null}
+
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
         dataVersion={dataVersion}
         statusFilter={statusFilter}
+        loading={isTodoListLoading}
+        error={error}
+        filterError={filterError}
       />
-      {error ? (
-        <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
-          Clear Error
-        </button>
-      ) : null}
-      {filterError ? (
-        <div>
-          <p>{filterError}</p>
-          <button
-            onClick={(e) => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
-          >
-            Clear Filter Error
-          </button>
-          <button
-            onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
-          >
-            Reset Filters
-          </button>
-        </div>
-      ) : null}
     </div>
   );
 }

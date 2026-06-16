@@ -1,0 +1,33 @@
+.container {
+  width: 97%;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.description {
+  margin-bottom: 1em;
+}
+
+.pageBuilt {
+  margin-bottom: 0.75em;
+}
+
+.listItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.listItem {
+  padding: 0.5em 1em;
+  color: var(--nav-text-color);
+  background-color: var(--nav-bg-color);
+  border-radius: 8px;
+}
+
+@media (min-width: 600px) {
+  .listItems {
+    flex-direction: row;
+  }
+}

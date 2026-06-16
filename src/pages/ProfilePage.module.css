@@ -1,0 +1,28 @@
+.container {
+  width: 98%;
+  max-width: 300px;
+  margin: 0 auto;
+  font-size: 1.3rem;
+}
+
+.errorText {
+  color: var(--error-text-color);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 1em;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--black-border);
+  margin-bottom: 1em;
+}
+
+.dataStats {
+  text-align: center;
+  font-weight: 600;
+}
