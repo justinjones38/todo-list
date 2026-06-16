@@ -9,10 +9,12 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import TodosPage from "./pages/TodosPage";
 import Footer from "./shared/Footer.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 export default function App() {
   return (
     <div className={styles.container}>
+      <ScrollToTop />
       <Header />
       <div className={styles.mainContentWrapper}>
         <Routes>
