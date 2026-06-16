@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "./LoginPage.module.css";
+import { sanitizeInput } from "../utils/sanitizeInput";
 
 export default function LoginPage({}) {
   const [email, setEmail] = useState("");
@@ -19,6 +20,8 @@ export default function LoginPage({}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoggingOn(true);
+    setEmail(prev => sanitizeInput(prev));
+    setPassword(prev => sanitizeInput(prev));
     try {
       const result = await login(email, password);
       if (!result.success) {
@@ -56,6 +59,7 @@ export default function LoginPage({}) {
             required
             className={styles.input}
             placeholder="Enter Email"
+            maxLength={50}
           />
           <label htmlFor="password" className={styles.label}>
             Password
@@ -68,6 +72,7 @@ export default function LoginPage({}) {
             required
             className={styles.input}
             placeholder="Enter password"
+            maxLength={20}
           />
         </div>
         <button disabled={isLoggingOn} className={styles.loginBtn}>

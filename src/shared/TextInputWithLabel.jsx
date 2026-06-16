@@ -20,6 +20,7 @@ export default function TextInputWithLabel({
         onChange={onChange}
         className={styles.input}
         placeholder="Add Todo"
+        maxLength={50}
       />
     </div>
   );

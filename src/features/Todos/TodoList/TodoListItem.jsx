@@ -13,7 +13,6 @@ export default function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     updateTitle,
     finishEdit,
   } = useEditableTitle(todo.title);
-  console.log(todo);
 
   const handleCancel = () => {
     cancelEdit();

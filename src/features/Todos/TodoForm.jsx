@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../utils/todoValidation";
+import { sanitizeInput } from "../../utils/sanitizeInput";
 import Logoff from "../Logoff";
 import styles from "./TodoForm.module.css";
 
@@ -10,7 +11,7 @@ export default function TodoForm({ onAddTodo }) {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-
+    setWorkingTodoTitle(prev => sanitizeInput(prev));
     if (workingTodoTitle) {
       onAddTodo(workingTodoTitle);
       setWorkingTodoTitle("");
