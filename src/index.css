@@ -83,7 +83,7 @@ TYPOGRAPHY
 h1 {
   color: var(--nav-text-color);
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 h2 {

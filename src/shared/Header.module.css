@@ -14,11 +14,14 @@
   width: 99%;
   margin: 0 auto;
   justify-content: space-between;
+  min-height: 60px;
+
 }
 
 .rightNav {
   display: flex;
   gap: 2.5em;
+  align-items: center;
 }
 
 @media (min-width: 600px) {
