@@ -1,7 +1,7 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import styles from "./ProfilePage.module.css"
+import styles from "./ProfilePage.module.css";
 
 export default function ProfilePage() {
   const userInfo = useLocation();
@@ -52,11 +52,18 @@ export default function ProfilePage() {
       {!loading && !error && todoStats ? (
         <>
           <h2 className={styles.title}>{email}'s profile page</h2>
-          <p className={styles.stats}>Total Todos: <span>{todoStats.total}</span></p>
-          <p className={styles.stats}>Completed Todos: <span>{todoStats.completed}</span></p>
-          <p className={styles.stats}>Active Todos: <span>{todoStats.active}</span></p>
+          <p className={styles.stats}>
+            Total Todos: <span>{todoStats.total}</span>
+          </p>
+          <p className={styles.stats}>
+            Completed Todos: <span>{todoStats.completed}</span>
+          </p>
+          <p className={styles.stats}>
+            Active Todos: <span>{todoStats.active}</span>
+          </p>
           <p className={styles.dataStats}>
-            You have completed {Math.round((todoStats.completed / todoStats.total) * 100)}% of
+            You have completed{" "}
+            {Math.round((todoStats.completed / todoStats.total) * 100)}% of
             todos
           </p>
         </>

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
-import styles from "./TodoList.module.css"
+import styles from "./TodoList.module.css";
 
 export default function TodoList({
   todoList,
@@ -40,7 +40,7 @@ export default function TodoList({
         return `Add todo above to get started`;
     }
   };
-  return filteredTodoList.todos.length === 0  ? (
+  return filteredTodoList.todos.length === 0 ? (
     <p className={styles.emptyMessage}>{getEmptyMessage()}</p>
   ) : (
     <div className={styles.container}>

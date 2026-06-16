@@ -9,7 +9,9 @@ export default function TextInputWithLabel({
 }) {
   return (
     <div className={styles.formItem}>
-      <label htmlFor={elementId} className={styles.label}>{labelText}</label>
+      <label htmlFor={elementId} className={styles.label}>
+        {labelText}
+      </label>
       <input
         type="text"
         id={elementId}

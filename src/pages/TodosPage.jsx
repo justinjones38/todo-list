@@ -131,8 +131,10 @@ export default function TodosPage() {
 
   const completeTodo = async (id, e) => {
     e.preventDefault();
-    const confirm = window.confirm("Do you want to mark the todo as completed?");
-    if(!confirm) {
+    const confirm = window.confirm(
+      "Do you want to mark the todo as completed?",
+    );
+    if (!confirm) {
       return;
     }
     const originalTodos = [...todoList];
@@ -215,7 +217,7 @@ export default function TodosPage() {
         <StatusFilter />
       </div>
       <div className={styles.textInputContainer}>
-        <FilterInput filterTerm={filterTerm} dispatch={dispatch} />        
+        <FilterInput filterTerm={filterTerm} dispatch={dispatch} />
         <TodoForm onAddTodo={addTodo} />
       </div>
 

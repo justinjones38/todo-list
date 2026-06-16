@@ -1,5 +1,5 @@
 import { TODO_ACTIONS } from "../reducers/todoReducer";
-import styles from "./SortBy.module.css"
+import styles from "./SortBy.module.css";
 
 export default function SortBy({ sortBy, sortDirection, dispatch }) {
   return (
@@ -21,13 +21,11 @@ export default function SortBy({ sortBy, sortDirection, dispatch }) {
         >
           <option value="createdAt">Creation Date</option>
           <option value="title">Title</option>
-        </select>        
+        </select>
       </div>
-      
+
       <div className={styles.sortItem}>
-        <label htmlFor="sortDirection">
-          Sort Direction
-        </label>
+        <label htmlFor="sortDirection">Sort Direction</label>
         <select
           value={sortDirection}
           onChange={(e) =>

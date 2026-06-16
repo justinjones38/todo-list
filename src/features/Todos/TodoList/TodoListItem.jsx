@@ -39,7 +39,11 @@ export default function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
           <>
             <TextInputWithLabel value={workingTitle} onChange={handleEdit} />
             <div className={styles.btnContainer}>
-              <button type="button" onClick={handleCancel} className={`${styles["btn"]} ${styles["cancelBtn"]}`}>
+              <button
+                type="button"
+                onClick={handleCancel}
+                className={`${styles["btn"]} ${styles["cancelBtn"]}`}
+              >
                 Cancel
               </button>
               <button
@@ -54,17 +58,22 @@ export default function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
           </>
         ) : (
           <div className={styles.todoItem}>
-              <p className={styles.title}>{todo.title}</p>
-              <div className={styles.todoBtnContainer}>
-                  <button className={styles.editTodo} onClick={() => startEditing()}>Edit</button>
-                  <button 
-                    onClick={(e) => onCompleteTodo(todo.id, e)}
-                    disabled={todo.isCompleted}
-                    className={`${styles["todoBtn"]} ${todo.isCompleted ? `${styles["completed"]}` : `${styles["notCompleted"]}`}`}
-                    >
-                      {todo.isCompleted ? "completed" : "not completed"}
-                  </button>
-              </div>
+            <p className={styles.title}>{todo.title}</p>
+            <div className={styles.todoBtnContainer}>
+              <button
+                className={styles.editTodo}
+                onClick={() => startEditing()}
+              >
+                Edit
+              </button>
+              <button
+                onClick={(e) => onCompleteTodo(todo.id, e)}
+                disabled={todo.isCompleted}
+                className={`${styles["todoBtn"]} ${todo.isCompleted ? `${styles["completed"]}` : `${styles["notCompleted"]}`}`}
+              >
+                {todo.isCompleted ? "completed" : "not completed"}
+              </button>
+            </div>
           </div>
         )}
       </form>

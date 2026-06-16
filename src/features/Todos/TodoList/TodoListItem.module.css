@@ -18,7 +18,8 @@
   background-color: var(--red-btn);
 }
 
-.cancelBtn:focus, .cancelBtn:hover {
+.cancelBtn:focus,
+.cancelBtn:hover {
   background-color: var(--red-btn-hover);
 }
 
@@ -26,10 +27,10 @@
   background-color: var(--green-btn);
 }
 
-.updateBtn:focus, .updateBtn:hover {
+.updateBtn:focus,
+.updateBtn:hover {
   background-color: var(--green-btn-hover);
 }
-
 
 .todoItem {
   padding: 0.5em 1em;
@@ -38,7 +39,6 @@
   margin: 0 auto;
   border-radius: 6px;
 }
-
 
 .title {
   font-weight: 600;
@@ -50,10 +50,10 @@
   display: flex;
   justify-content: space-between;
   gap: 1.25em;
-
 }
 
-.editTodo, .todoBtn {
+.editTodo,
+.todoBtn {
   color: var(--primary-btn-text-color);
   border: none;
   padding: 0.75em 1.25em;
@@ -65,11 +65,13 @@
   transition: 0.3s background-color;
 }
 
-.editTodo:focus, .editTodo:hover {
+.editTodo:focus,
+.editTodo:hover {
   background-color: var(--primary-btn-bg-hover-color);
 }
 
-.editTodo, .todoBtn {
+.editTodo,
+.todoBtn {
   flex: 1;
 }
 
@@ -83,6 +85,7 @@
   transition: 0.3s background-color;
 }
 
-.notCompleted:focus, .notCompleted:hover {
+.notCompleted:focus,
+.notCompleted:hover {
   background-color: var(--red-btn-hover);
 }

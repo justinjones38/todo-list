@@ -1,46 +1,43 @@
 /* ===========
 RESET CSS
 ==============*/
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 /* ===========
 CSS VARIABLES
 ==============*/
 :root {
   /* Background Colors */
-  --bg-color: #FAFAFA;
-  --nav-bg-color: #072B50;
+  --bg-color: #fafafa;
+  --nav-bg-color: #072b50;
 
   /* Text Colors */
-  --primary-text-color: #1A1A1A;
-  --nav-text-color: #FCFCFC;
-  --error-text-color: #9E0000;
+  --primary-text-color: #1a1a1a;
+  --nav-text-color: #fcfcfc;
+  --error-text-color: #9e0000;
   --important-text-color: #f76767;
 
-
   /* Buttons  */
-  --primary-btn-bg-color: #072B50;
+  --primary-btn-bg-color: #072b50;
   --primary-btn-bg-hover-color: #16599c;
   --primary-btn-bg-disabled-color: #072c5067;
-  --primary-btn-text-color: #FCFCFC;
-  --close-btn-error-hover: #9E0000;
-  --red-btn: #9E0000;
+  --primary-btn-text-color: #fcfcfc;
+  --close-btn-error-hover: #9e0000;
+  --red-btn: #9e0000;
   --red-btn-hover: #c95454;
   --green-btn: #154814;
   --green-btn-hover: #3dcd3a;
 
-
-
   /* Reusable Styles */
-  --border-color: #FCFCFC;
-  --black-border: #1A1A1A
+  --border-color: #fcfcfc;
+  --black-border: #1a1a1a;
 }
-
 
 /* ===========
 GENERAL LAYOUT
@@ -50,10 +47,11 @@ body {
   font-size: 1rem;
   background-color: var(--bg-color);
   color: var(--primary-text-color);
-  font-family: "Inter", sans-serif, Arial, Helvetica 
+  font-family: "Inter", sans-serif, Arial, Helvetica;
 }
 
-button, svg {
+button,
+svg {
   display: block;
   cursor: pointer;
 }
@@ -62,7 +60,8 @@ select {
   cursor: pointer;
 }
 
-a, button {
+a,
+button {
   font-family: inherit;
   text-decoration: none;
 }
@@ -73,10 +72,10 @@ ul {
   padding: 0;
 }
 
-label, input {
+label,
+input {
   display: block;
 }
-
 
 /* ===========
 TYPOGRAPHY

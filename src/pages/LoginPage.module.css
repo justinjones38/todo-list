@@ -31,7 +31,7 @@
 .label::after {
   content: "*";
   display: inline;
-  color: var(--important-text-color)
+  color: var(--important-text-color);
 }
 
 .loginBtn {
@@ -47,7 +47,8 @@
   transition: 0.3s background-color;
 }
 
-.loginBtn:focus, .loginBtn:hover {
+.loginBtn:focus,
+.loginBtn:hover {
   background-color: var(--primary-btn-bg-hover-color);
 }
 

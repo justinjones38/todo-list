@@ -1,10 +1,12 @@
 import { TODO_ACTIONS } from "../reducers/todoReducer";
-import styles from "./FilterInput.module.css"
+import styles from "./FilterInput.module.css";
 
 export default function FilterInput({ filterTerm, dispatch }) {
   return (
     <div className={styles.container}>
-      <label htmlFor="filterInput" className={styles.label}>Search todos</label>
+      <label htmlFor="filterInput" className={styles.label}>
+        Search todos
+      </label>
       <input
         id="filterInput"
         type="text"

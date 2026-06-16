@@ -4,7 +4,8 @@
   margin: 0 auto 1em auto;
 }
 
-.sortContainer, .textInputContainer {
+.sortContainer,
+.textInputContainer {
   max-width: 300px;
   width: 98%;
 }

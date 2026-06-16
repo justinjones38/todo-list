@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
-import styles from "./LoginPage.module.css"
+import styles from "./LoginPage.module.css";
 
 export default function LoginPage({}) {
   const [email, setEmail] = useState("");
@@ -22,8 +22,8 @@ export default function LoginPage({}) {
     try {
       const result = await login(email, password);
       if (!result.success) {
-        setEmail('');
-        setPassword('');
+        setEmail("");
+        setPassword("");
         throw new Error();
       }
 
@@ -45,7 +45,9 @@ export default function LoginPage({}) {
       {authError ? <p className={styles.errorText}>{authError}</p> : null}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formElements}>
-          <label htmlFor="email" className={styles.label}>Email</label>
+          <label htmlFor="email" className={styles.label}>
+            Email
+          </label>
           <input
             type="text"
             value={email}
@@ -55,7 +57,9 @@ export default function LoginPage({}) {
             className={styles.input}
             placeholder="Enter Email"
           />
-          <label htmlFor="password" className={styles.label}>Password</label>
+          <label htmlFor="password" className={styles.label}>
+            Password
+          </label>
           <input
             type="password"
             value={password}
