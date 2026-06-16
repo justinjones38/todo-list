@@ -124,7 +124,7 @@ export default function TodosPage() {
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
-        payload: { originalTodos, error: "Cannot add todo" },
+        payload: { originalTodos, error: "Server failure, cannot add todo right now. Please try again later" },
       });
     }
   };
@@ -221,35 +221,41 @@ export default function TodosPage() {
         <TodoForm onAddTodo={addTodo} />
       </div>
 
-      {error ? <h2>{error}</h2> : null}
+      {error ? <h2 className={styles.errorText}>{error}</h2> : null}
       {isTodoListLoading ? <h2>Loading...</h2> : null}
+      {error ? (
+        <button className={styles.errorBtn} onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
+          Clear Error
+        </button>
+      ) : null}
+      {filterError ? (
+        <div>
+          <p className={styles.errorText}>{filterError}</p>
+          <button
+            onClick={(e) => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
+            className={styles.errorBtn}
+          >
+            Clear Filter Error
+          </button>
+          <button
+            onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
+            className={styles.errorBtn}
+          >
+            Reset Filters
+          </button>
+        </div>
+      ) : null}
+
       <TodoList
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
         dataVersion={dataVersion}
         statusFilter={statusFilter}
+        loading={isTodoListLoading}
+        error={error}
+        filterError={filterError}
       />
-      {error ? (
-        <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
-          Clear Error
-        </button>
-      ) : null}
-      {filterError ? (
-        <div>
-          <p>{filterError}</p>
-          <button
-            onClick={(e) => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
-          >
-            Clear Filter Error
-          </button>
-          <button
-            onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
-          >
-            Reset Filters
-          </button>
-        </div>
-      ) : null}
     </div>
   );
 }
