@@ -20,8 +20,8 @@ export default function LoginPage({}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoggingOn(true);
-    setEmail(prev => sanitizeInput(prev));
-    setPassword(prev => sanitizeInput(prev));
+    setEmail((prev) => sanitizeInput(prev));
+    setPassword((prev) => sanitizeInput(prev));
     try {
       const result = await login(email, password);
       if (!result.success) {

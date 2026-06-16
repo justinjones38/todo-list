@@ -124,7 +124,11 @@ export default function TodosPage() {
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
-        payload: { originalTodos, error: "Server failure, cannot add todo right now. Please try again later" },
+        payload: {
+          originalTodos,
+          error:
+            "Server failure, cannot add todo right now. Please try again later",
+        },
       });
     }
   };
@@ -224,7 +228,10 @@ export default function TodosPage() {
       {error ? <h2 className={styles.errorText}>{error}</h2> : null}
       {isTodoListLoading ? <h2>Loading...</h2> : null}
       {error ? (
-        <button className={styles.errorBtn} onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
+        <button
+          className={styles.errorBtn}
+          onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
+        >
           Clear Error
         </button>
       ) : null}

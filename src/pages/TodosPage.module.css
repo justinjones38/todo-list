@@ -39,7 +39,8 @@
   transition: 0.3s background-color;
 }
 
-.errorBtn:hover, .errorBtn:focus {
+.errorBtn:hover,
+.errorBtn:focus {
   background-color: var(--red-btn-hover);
 }
 

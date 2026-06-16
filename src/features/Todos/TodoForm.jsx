@@ -11,7 +11,7 @@ export default function TodoForm({ onAddTodo }) {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-    setWorkingTodoTitle(prev => sanitizeInput(prev));
+    setWorkingTodoTitle((prev) => sanitizeInput(prev));
     if (workingTodoTitle) {
       onAddTodo(workingTodoTitle);
       setWorkingTodoTitle("");

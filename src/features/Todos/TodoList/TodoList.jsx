@@ -10,7 +10,7 @@ export default function TodoList({
   statusFilter = "active",
   loading,
   error,
-  filterError
+  filterError,
 }) {
   const filteredTodoList = useMemo(() => {
     let filteredTodos;
@@ -43,10 +43,10 @@ export default function TodoList({
         return `Add todo above to get started`;
     }
   };
-  if(loading || error || filterError) {
+  if (loading || error || filterError) {
     return;
   }
-  
+
   return filteredTodoList.todos.length === 0 ? (
     <p className={styles.emptyMessage}>{getEmptyMessage()}</p>
   ) : (

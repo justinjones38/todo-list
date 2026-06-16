@@ -48,7 +48,11 @@ export default function ProfilePage() {
   return (
     <div className={styles.container}>
       {loading ? <h2>Loading...</h2> : null}
-      {error ? <p className={styles.errorText}>Server failure: cannot fetch profile stats. Please try again later</p> : null}
+      {error ? (
+        <p className={styles.errorText}>
+          Server failure: cannot fetch profile stats. Please try again later
+        </p>
+      ) : null}
       {!loading && !error && todoStats ? (
         <>
           <h2 className={styles.title}>{email}'s profile page</h2>
